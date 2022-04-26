@@ -21,8 +21,8 @@ namespace ControlModul.Security
         {
             try
             {
-                HashAlgorithm sha256Algorithm = HashAlgorithm.Create(hashAlgorithm);
-                byte[] myHash = sha256Algorithm.ComputeHash(Convertor.StringToBytes(plainText));
+                HashAlgorithm usedHashAlgorithm = HashAlgorithm.Create(hashAlgorithm);
+                byte[] myHash = usedHashAlgorithm.ComputeHash(Convertor.StringToBytes(plainText));
 
                 return myHash;
             }
@@ -36,8 +36,8 @@ namespace ControlModul.Security
         {
             try
             {
-                HashAlgorithm sha256Algorithm = HashAlgorithm.Create(hashAlgorithm);
-                byte[] myHash = sha256Algorithm.ComputeHash(Convertor.StringToBytes(plainText));
+                HashAlgorithm usedHashAlgorithm = HashAlgorithm.Create(hashAlgorithm);
+                byte[] myHash = usedHashAlgorithm.ComputeHash(Convertor.StringToBytes(plainText));
 
                 return Convertor.BytesToString(myHash);
             }
@@ -51,8 +51,8 @@ namespace ControlModul.Security
         {
             try
             {
-                HashAlgorithm sha256Algorithm = HashAlgorithm.Create(hashAlgorithm);
-                byte[] myHash = sha256Algorithm.ComputeHash(binaryData);
+                HashAlgorithm usedHashAlgorithm = HashAlgorithm.Create(hashAlgorithm);
+                byte[] myHash = usedHashAlgorithm.ComputeHash(binaryData);
 
                 return myHash;
             }
@@ -66,8 +66,8 @@ namespace ControlModul.Security
         {
             try
             {
-                HashAlgorithm sha256Algorithm = HashAlgorithm.Create(hashAlgorithm);
-                byte[] myHash = sha256Algorithm.ComputeHash(binaryData);
+                HashAlgorithm usedHashAlgorithm = HashAlgorithm.Create(hashAlgorithm);
+                byte[] myHash = usedHashAlgorithm.ComputeHash(binaryData);
 
                 return Convertor.BytesToString(myHash);
             }
