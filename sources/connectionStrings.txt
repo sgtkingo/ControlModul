@@ -1,0 +1,1 @@
+Data Source=NTB-DELL-LATIDU\SQLEXPRESS;Initial Catalog=test;Integrated Security=True
