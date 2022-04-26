@@ -29,7 +29,7 @@ namespace ModuleTester
         private void TesterForm_Load(object sender, EventArgs e)
         {
             Loger.SetLogDir(@"./log", true);
-            Console.WriteLine($"\t(i) {this}: Tester ready!");
+            Console.WriteLine($"\t(i) {this}: Tester ready! >P");
         }
 
         #region Buttons click events
