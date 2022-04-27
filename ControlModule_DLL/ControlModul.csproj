@@ -36,6 +36,9 @@
     <DocumentationFile>
     </DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Developer_Folder.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
@@ -175,6 +178,41 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pics\document-copy-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Developer_Folder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\folder_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\gear-proccess.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\chat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\loading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pics\diskette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Developer_Folder.ico" />
+    <None Include="Developer_Folder_Icon.png" />
+    <None Include="Developer_Folder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

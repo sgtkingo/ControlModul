@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Control Modul")]
 [assembly: AssemblyDescription("Universal data control module")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Jiri Konecny")]
 [assembly: AssemblyProduct("ControlModul as DLL library")]
 [assembly: AssemblyCopyright("Copyright © Jiri Konecny  2021")]
 [assembly: AssemblyTrademark("MIT Licence")]
@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 // Můžete zadat všechny hodnoty nebo nastavit výchozí číslo buildu a revize
 // pomocí zástupného znaku * takto:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.04.262")]
-[assembly: AssemblyFileVersion("1.2.04.262")]
+[assembly: AssemblyVersion("1.2.04.263")]
+[assembly: AssemblyFileVersion("1.2.04.263")]
 [assembly: NeutralResourcesLanguage("en")]
