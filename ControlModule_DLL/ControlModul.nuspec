@@ -7,11 +7,14 @@
     <authors>jirka.k</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
-    <icon>Developer_Folder_Icon.png</icon>
+    <icon>Resources\icons\Developer_Folder_Icon.png</icon>
     <projectUrl>https://github.com/sgtkingo/ControlModul</projectUrl>
     <description>$description$</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Helpers Control Process Development Tools</tags>
   </metadata>
+  <files>
+    <file src="https://github.com/sgtkingo/ControlModul/blob/master/ControlModule_DLL/Resources/Developer_Folder.png" target="Resources\icons" />
+  </files>  
 </package>

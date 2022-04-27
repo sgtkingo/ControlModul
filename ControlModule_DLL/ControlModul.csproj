@@ -211,6 +211,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Developer_Folder.ico" />
+    <None Include="Resources\icons\Developer_Folder_Icon.png" />
+    <None Include="Resources\icons\Developer_Folder.ico" />
+    <None Include="Resources\icons\Developer_Folder.png" />
     <None Include="Developer_Folder_Icon.png" />
     <None Include="Developer_Folder.png" />
   </ItemGroup>
