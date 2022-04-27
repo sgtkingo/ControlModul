@@ -180,9 +180,6 @@
     <None Include="Resources\pics\document-copy-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Developer_Folder.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\pics\folder.png" />
   </ItemGroup>
   <ItemGroup>
@@ -213,9 +210,7 @@
     <Content Include="Developer_Folder.ico" />
     <None Include="Resources\icons\Developer_Folder_Icon.png" />
     <None Include="Resources\icons\Developer_Folder.ico" />
-    <None Include="Resources\icons\Developer_Folder.png" />
     <None Include="Developer_Folder_Icon.png" />
-    <None Include="Developer_Folder.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
