@@ -31,8 +31,10 @@ namespace ControlModul.DBControl.SQL
         {
             this.labelStatus = new System.Windows.Forms.Label();
             this.buttonRepeat = new System.Windows.Forms.Button();
-            this.processWorkerConnector = new ControlModul.ProcessControl.ProcessWorker();
             this.pictureBoxResult = new System.Windows.Forms.PictureBox();
+            this.labelDatabaseName = new System.Windows.Forms.Label();
+            this.labelDatabaseNameTag = new System.Windows.Forms.Label();
+            this.processWorkerConnector = new ControlModul.ProcessControl.ProcessWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResult)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,23 +52,13 @@ namespace ControlModul.DBControl.SQL
             // 
             this.buttonRepeat.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.buttonRepeat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonRepeat.Location = new System.Drawing.Point(251, 12);
+            this.buttonRepeat.Location = new System.Drawing.Point(392, 12);
             this.buttonRepeat.Name = "buttonRepeat";
             this.buttonRepeat.Size = new System.Drawing.Size(50, 50);
             this.buttonRepeat.TabIndex = 3;
             this.buttonRepeat.Text = "TEST";
             this.buttonRepeat.UseVisualStyleBackColor = false;
             this.buttonRepeat.Click += new System.EventHandler(this.buttonRepeat_Click);
-            // 
-            // processWorkerConnector
-            // 
-            this.processWorkerConnector.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.processWorkerConnector.CausesValidation = false;
-            this.processWorkerConnector.Location = new System.Drawing.Point(12, 12);
-            this.processWorkerConnector.Name = "processWorkerConnector";
-            this.processWorkerConnector.Size = new System.Drawing.Size(233, 50);
-            this.processWorkerConnector.TabIndex = 0;
-            this.processWorkerConnector.WorkerName = "Connector";
             // 
             // pictureBoxResult
             // 
@@ -78,16 +70,47 @@ namespace ControlModul.DBControl.SQL
             this.pictureBoxResult.TabIndex = 1;
             this.pictureBoxResult.TabStop = false;
             // 
+            // labelDatabaseName
+            // 
+            this.labelDatabaseName.AutoSize = true;
+            this.labelDatabaseName.Location = new System.Drawing.Point(116, 94);
+            this.labelDatabaseName.Name = "labelDatabaseName";
+            this.labelDatabaseName.Size = new System.Drawing.Size(10, 13);
+            this.labelDatabaseName.TabIndex = 4;
+            this.labelDatabaseName.Text = "-";
+            // 
+            // labelDatabaseNameTag
+            // 
+            this.labelDatabaseNameTag.AutoSize = true;
+            this.labelDatabaseNameTag.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelDatabaseNameTag.Location = new System.Drawing.Point(9, 94);
+            this.labelDatabaseNameTag.Name = "labelDatabaseNameTag";
+            this.labelDatabaseNameTag.Size = new System.Drawing.Size(101, 13);
+            this.labelDatabaseNameTag.TabIndex = 5;
+            this.labelDatabaseNameTag.Text = "Database Name:";
+            // 
+            // processWorkerConnector
+            // 
+            this.processWorkerConnector.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.processWorkerConnector.CausesValidation = false;
+            this.processWorkerConnector.Location = new System.Drawing.Point(12, 12);
+            this.processWorkerConnector.Name = "processWorkerConnector";
+            this.processWorkerConnector.Size = new System.Drawing.Size(374, 50);
+            this.processWorkerConnector.TabIndex = 0;
+            this.processWorkerConnector.WorkerName = "Connector";
+            // 
             // SQLStatuserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 88);
+            this.ClientSize = new System.Drawing.Size(454, 116);
+            this.Controls.Add(this.labelDatabaseNameTag);
+            this.Controls.Add(this.labelDatabaseName);
             this.Controls.Add(this.buttonRepeat);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.pictureBoxResult);
             this.Controls.Add(this.processWorkerConnector);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SQLStatuserForm";
@@ -108,5 +131,7 @@ namespace ControlModul.DBControl.SQL
         private System.Windows.Forms.PictureBox pictureBoxResult;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.Button buttonRepeat;
+        private System.Windows.Forms.Label labelDatabaseName;
+        private System.Windows.Forms.Label labelDatabaseNameTag;
     }
 }

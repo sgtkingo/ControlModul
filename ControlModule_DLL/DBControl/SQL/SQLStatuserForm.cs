@@ -71,6 +71,7 @@ namespace ControlModul.DBControl.SQL
         private void GetResult(object sender, RunWorkerCompletedEventArgs e)
         {
             labelStatus.Text = SQLConnector.LastTestMessage;
+            labelDatabaseName.Text = $"{SQLConnector.ServerAddress}/{SQLConnector.DatabaseName}";
             SetStatus(SQLConnector.LastTestResult);
         }
 

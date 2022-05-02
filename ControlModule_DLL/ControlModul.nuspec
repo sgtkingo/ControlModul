@@ -7,7 +7,7 @@
     <authors>jirka.k</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
-    <icon>Resources\icons\ControlModulIcon.png.png</icon>
+    <icon>Resources\icons\ControlModulIcon.png</icon>
     <projectUrl>https://github.com/sgtkingo/ControlModul</projectUrl>
     <repository type="git" url="https://github.com/sgtkingo/ControlModul.git" branch="master"/>
     <description>$description$</description>
@@ -21,6 +21,6 @@
     </dependencies>    
   </metadata>
   <files>
-    <file src="ControlModulIcon.png.png" target="Resources\icons" />
+    <file src="ControlModulIcon.png" target="Resources\icons" />
   </files>  
 </package>

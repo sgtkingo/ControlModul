@@ -91,26 +91,6 @@ namespace ControlModul.Properties {
         }
         
         /// <summary>
-        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Icon podobný (Ikona).
-        /// </summary>
-        internal static System.Drawing.Icon Developer_Folder {
-            get {
-                object obj = ResourceManager.GetObject("Developer_Folder", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Developer_Folder_Icon {
-            get {
-                object obj = ResourceManager.GetObject("Developer_Folder_Icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap diskette {
