@@ -37,7 +37,7 @@
     </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Developer_Folder.ico</ApplicationIcon>
+    <ApplicationIcon>ControlModul.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -207,10 +207,8 @@
     <None Include="Resources\pics\diskette.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Developer_Folder.ico" />
-    <None Include="Resources\icons\Developer_Folder_Icon.png" />
-    <None Include="Resources\icons\Developer_Folder.ico" />
-    <None Include="Developer_Folder_Icon.png" />
+    <Content Include="ControlModul.ico" />
+    <None Include="ControlModulIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
