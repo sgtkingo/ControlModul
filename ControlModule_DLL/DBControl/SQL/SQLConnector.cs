@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
+using ControlModul.DBControl.SQL.Exceptions;
+
 namespace ControlModul.DBControl.SQL
 {
     /// <summary>
@@ -117,7 +119,7 @@ namespace ControlModul.DBControl.SQL
             if( string.IsNullOrEmpty(connectionString) )
             {
                 ErrorMessage = "Connection String is Null Or Empty!";
-                throw new ArgumentNullException(ErrorMessage);
+                throw new ConnectionStringIsEmptyException();
             }
             ConnectionString = connectionString;
 

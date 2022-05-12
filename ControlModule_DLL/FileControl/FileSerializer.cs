@@ -15,7 +15,7 @@ namespace ControlModul.FileControl
     /// <remarks>
     /// Serialize and Deserialize files by different methods
     /// 
-    /// - Possiblity to use binary or XML formating, JSON will be added soon"/>
+    /// - Possiblity to use binary or XML formating, JSON will be added soon
     /// </remarks>
     public static class FileSerializer
     {

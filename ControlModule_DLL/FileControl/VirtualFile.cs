@@ -9,7 +9,7 @@ namespace ControlModul.FileControl
     /// <remarks>
     /// Create digital virtual twin of any text file or create your own.
     /// 
-    /// - Possibility to create nempty virual file and append some new on it by <see cref="AppendFile(string, bool)"/>
+    /// - Possibility to create empty virual file and append some new on it by <see cref="AppendFile(string, bool)"/>
     /// - Possibility to work with file data to file by <see cref="FillFile(string)">, <see cref="AddData(string, bool)">, <see cref="GetData">, <see cref="EraseData">
     /// - Autosave file by <see cref="SaveFile">
     /// - Possibility to add labels on the top of file by <see cref="SetLabels(string)">

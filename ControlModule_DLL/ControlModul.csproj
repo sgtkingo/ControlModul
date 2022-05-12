@@ -37,7 +37,7 @@
     </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ControlModul.ico</ApplicationIcon>
+    <ApplicationIcon>control_modul.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -64,6 +64,7 @@
     <Compile Include="DBControl\Excel_OLE\ExcelConnector.cs" />
     <Compile Include="DBControl\SQL\ConnectionStringBuilder.cs" />
     <Compile Include="DBControl\SQL\DatabaseManager.cs" />
+    <Compile Include="DBControl\SQL\Exceptions\ConnectionStringIsEmptyException.cs" />
     <Compile Include="DBControl\SQL\SQLConnectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ControlModul.ico" />
+    <Content Include="control_modul.ico" />
     <None Include="ControlModulIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -26,19 +26,27 @@ namespace ControlModul.Entity
         public static DataTable GetTable<T>(this DbContext context, string schemaName = "dbo",
                                                     string tableName = null) where T : class
         {
-            //Name rules for tables
-            if( string.IsNullOrEmpty(tableName))
+            try
             {
-                tableName = typeof(T).Name;
-                if (tableName.EndsWith("e"))
+                //Name rules for tables
+                if (string.IsNullOrEmpty(tableName))
                 {
-                    tableName += "s";
+                    tableName = typeof(T).Name;
+                    if (tableName.EndsWith("e"))
+                    {
+                        tableName += "s";
+                    }
+                    else tableName += "es";
                 }
-                else tableName += "es";
+                string textQuery = $"SELECT * FROM [{schemaName}].[{tableName}]";
+                return AsTable(context, textQuery);
             }
-            string textQuery = $"SELECT * FROM [{schemaName}].[{tableName}]";
-            return AsTable(context, textQuery);
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
         public static DataTable AsTable(this DbContext context, string sqlQuery,
                                           params DbParameter[] parameters)
         {
