@@ -19,30 +19,19 @@ namespace ControlModul.FileControl
             if(virtualFile == null)return false;
 
             virtualFile.EraseData();
-            string data = string.Empty;
-
             if (!File.Exists(virtualFile.FILEPATH))
             {
                 Loger.Error($"File {virtualFile.FILEPATH} DOESNT exist!");
                 return false;
             }
-            try{ 
-                using (FileStream fs = new FileStream(virtualFile.FILEPATH,FileMode.Open))
-                {
-                fs.Seek(0,SeekOrigin.Begin);
-                    StreamReader sr=new StreamReader(fs);
-
-                    while(!sr.EndOfStream){ 
-                        data += sr.ReadLine();
-                        data += "\n";
-                    }
-                    sr.Close();
-                }               
+            try{
+                var data = LoadFile(virtualFile.FILEPATH);
+                virtualFile.FillFile(data);
             }catch (Exception e){
                 Loger.LogAndVisualize(e);
                 return false;
             }
-            virtualFile.FillFile(data);
+
             Loger.Info("File "+virtualFile.FILENAME+" loaded...");
             return true;
         }
@@ -50,15 +39,8 @@ namespace ControlModul.FileControl
         public static bool SaveFile(VirtualFile virtualFile){
             if(virtualFile == null)return false;
 
-            string filePath=(virtualFile.FILEPATH);
-            try{ 
-                using (FileStream fs = new FileStream(filePath,FileMode.Create))
-                {
-                fs.Seek(0,SeekOrigin.Begin);
-                    StreamWriter sw=new StreamWriter(fs);
-                    sw.Write(virtualFile.GetData());
-                    sw.Close();
-                }               
+            try{
+                SaveFile(virtualFile.FILEPATH, virtualFile.FILEDATA);
             }catch (Exception e){
                 Loger.LogAndVisualize(e);
                 return false;

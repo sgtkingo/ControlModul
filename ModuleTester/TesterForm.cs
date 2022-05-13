@@ -107,9 +107,21 @@ namespace ModuleTester
                 string filePath = @"../../../sources/test.txt";
 
                 VirtualFile virtualFile = new VirtualFile(filePath);
-                virtualFile.AddData("Baf");
+                virtualFile.AddData(DateTime.Now.ToString("f"));
                 virtualFile.AddData("Baf", true);
                 virtualFile.SaveFile();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"\t(!) {this}: Problem: {ex.Message} | {ex.Source} ");
+            }
+
+            try
+            {
+                //Code here
+                string filePath = @"../../../sources/test.txt";
+                string data = FileManager.LoadFile(filePath);
+                Console.WriteLine(data);
             }
             catch (Exception ex)
             {
