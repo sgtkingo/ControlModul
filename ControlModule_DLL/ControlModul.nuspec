@@ -10,7 +10,7 @@
     <icon>Resources\icons\control_modul_icon.png</icon>
     <projectUrl>https://github.com/sgtkingo/ControlModul</projectUrl>
     <repository type="git" url="https://github.com/sgtkingo/ControlModul.git" branch="master"/>
-    <description>$description$</description>
+    <description>Universal Control Modul for .NET</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>$copyright$</copyright>
     <tags>Helpers Control Process Development Tools</tags>
