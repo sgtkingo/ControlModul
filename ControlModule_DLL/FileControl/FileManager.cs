@@ -45,6 +45,7 @@ namespace ControlModul.FileControl
                 Loger.LogAndVisualize(e);
                 return false;
             }
+
             Loger.Info("File "+virtualFile.FILENAME+" saved!");
             return true;
         }
