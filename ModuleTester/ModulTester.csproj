@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlModul, Version=1.2.8.231, Culture=neutral, PublicKeyToken=675704c0decb891e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ControlModule_DLL\bin\Debug\ControlModul.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -56,15 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProccesWorkerTestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="ProccesWorkerTestForm.cs" />
     <Compile Include="ProccesWorkerTestForm.Designer.cs">
       <DependentUpon>ProccesWorkerTestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TesterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="TesterForm.cs" />
     <Compile Include="TesterForm.Designer.cs">
       <DependentUpon>TesterForm.cs</DependentUpon>
     </Compile>
@@ -98,12 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ControlModule_DLL\ControlModul.csproj">
-      <Project>{7ed82d76-8c1b-4ab7-ad78-ff32f61c740c}</Project>
-      <Name>ControlModul</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

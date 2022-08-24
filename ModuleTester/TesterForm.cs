@@ -28,7 +28,7 @@ namespace ModuleTester
 
         private void TesterForm_Load(object sender, EventArgs e)
         {
-            Loger.SetLogDir(@"./log", true);
+            LogerManager.Init(@"./log");
             Console.WriteLine($"\t(i) {this}: Tester ready! >P");
         }
 
@@ -85,6 +85,11 @@ namespace ModuleTester
         private void btn_TestLogger_Click(object sender, EventArgs e)
         {
             TestLogger();
+        }
+
+        private void btn_TestLogerManager_Click(object sender, EventArgs e)
+        {
+            TestLogerManager();
         }
 
         private void btn_TestReporter_Click(object sender, EventArgs e)
@@ -218,10 +223,25 @@ namespace ModuleTester
             Loger.Warning("Baf!2");
         }
 
+        private void TestLogerManager()
+        {
+            /*
+            foreach (var report in LogerManager.Load())
+            {
+                Debug.WriteLine(report);
+            }
+            */
+            //LogerManager.DoBackup();
+            //LogerManager.Maintanance();
+
+            var form = new LogerViewer();
+            form.ShowDialog(this);
+        }
+
         private void TestReporter()
         {
             ReportForm.CreateReporter(this);
-            var report = new Report("Hello", this);
+            var report = new Report(this, "Hello");
             ReportManager.LogReport(report);
         }
 
@@ -249,6 +269,5 @@ namespace ModuleTester
             }
         }
         #endregion
-
     }
 }

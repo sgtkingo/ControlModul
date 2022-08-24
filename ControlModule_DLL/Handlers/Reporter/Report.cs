@@ -23,20 +23,27 @@ namespace ControlModul.Handlers.Reporter
             Source = source;
         }
 
-        public Report(string message, object source) : base()
+        public Report(object source, string message) : base()
         {
             Message = message;
             Source = source;
         }
 
+        public Report(object source, string message, DateTime date) : base()
+        {
+            Message = message;
+            Source = source;
+            CreateDate = date;
+        }
+
         public void AppendMessage(string text)
         {
-            Message += text;
+            Message = text;
         }
 
         public void AppendException(Exception exception)
         {
-            Message += $"Exception occours! {exception.Message}|({exception.Source})";
+            Message = $"Exception occours! {exception.Message}|({exception.Source})";
         }
 
         public override string ToString()

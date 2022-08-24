@@ -38,6 +38,7 @@ namespace ModuleTester
             this.btn_TestSQLStatuser = new System.Windows.Forms.Button();
             this.btn_TestReporter = new System.Windows.Forms.Button();
             this.buttonTestCrypto = new System.Windows.Forms.Button();
+            this.buttonTestLogerManager = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_TestAll
@@ -83,7 +84,7 @@ namespace ModuleTester
             // btn_TestErrorLog
             // 
             this.btn_TestErrorLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btn_TestErrorLog.Location = new System.Drawing.Point(284, 177);
+            this.btn_TestErrorLog.Location = new System.Drawing.Point(568, 328);
             this.btn_TestErrorLog.Name = "btn_TestErrorLog";
             this.btn_TestErrorLog.Size = new System.Drawing.Size(206, 96);
             this.btn_TestErrorLog.TabIndex = 3;
@@ -135,12 +136,24 @@ namespace ModuleTester
             this.buttonTestCrypto.UseVisualStyleBackColor = true;
             this.buttonTestCrypto.Click += new System.EventHandler(this.buttonTestCrypto_Click);
             // 
+            // buttonTestLogerManager
+            // 
+            this.buttonTestLogerManager.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonTestLogerManager.Location = new System.Drawing.Point(284, 177);
+            this.buttonTestLogerManager.Name = "buttonTestLogerManager";
+            this.buttonTestLogerManager.Size = new System.Drawing.Size(206, 96);
+            this.buttonTestLogerManager.TabIndex = 8;
+            this.buttonTestLogerManager.Text = "TEST LOGGER MNG";
+            this.buttonTestLogerManager.UseVisualStyleBackColor = true;
+            this.buttonTestLogerManager.Click += new System.EventHandler(this.btn_TestLogerManager_Click);
+            // 
             // TesterForm
             // 
             this.AcceptButton = this.btn_TestAll;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonTestLogerManager);
             this.Controls.Add(this.buttonTestCrypto);
             this.Controls.Add(this.btn_TestReporter);
             this.Controls.Add(this.btn_TestSQLStatuser);
@@ -167,6 +180,7 @@ namespace ModuleTester
         private System.Windows.Forms.Button btn_TestSQLStatuser;
         private System.Windows.Forms.Button btn_TestReporter;
         private System.Windows.Forms.Button buttonTestCrypto;
+        private System.Windows.Forms.Button buttonTestLogerManager;
     }
 }
 

@@ -94,6 +94,13 @@
       <DependentUpon>ErrorMessager.cs</DependentUpon>
     </Compile>
     <Compile Include="Handlers\Loger\Loger.cs" />
+    <Compile Include="Handlers\Loger\LogerManager.cs" />
+    <Compile Include="Handlers\Loger\LogerViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Handlers\Loger\LogerViewer.Designer.cs">
+      <DependentUpon>LogerViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Handlers\Reporter\Report.cs" />
     <Compile Include="Handlers\Reporter\ReportForm.cs">
       <SubType>Form</SubType>
@@ -130,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Handlers\Error\ErrorMessager.resx">
       <DependentUpon>ErrorMessager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Handlers\Loger\LogerViewer.resx">
+      <DependentUpon>LogerViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Handlers\Reporter\ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>

@@ -694,17 +694,24 @@ namespace ControlModul.Handlers.Loger
         /// <returns>Null if setting email address was successful, otherwise an exception with what went wrong.</returns>
         public static Exception SetSupportEmail(string email, string password, string host, int port = 587)
         {
-            if (!IsSupportEmailValid(email))
+            try
             {
-                return new ArgumentException("Invalid Email");
+                if (!IsSupportEmailValid(email))
+                {
+                    throw new ArgumentException("Invalid Email");
+                }
+                if (string.IsNullOrEmpty(password))
+                {
+                    throw new ArgumentNullException("Password");
+                }
+                if (string.IsNullOrEmpty(host))
+                {
+                    throw new ArgumentNullException("Host");
+                }
             }
-            if (string.IsNullOrEmpty(password))
+            catch (Exception ex)
             {
-                return new ArgumentNullException("Password");
-            }
-            if (string.IsNullOrEmpty(host))
-            {
-                return new ArgumentNullException("Host");
+                return ex;
             }
 
             _supportEmail = email;
@@ -733,13 +740,13 @@ namespace ControlModul.Handlers.Loger
         /// <summary>
         /// Send SupportEmail with error description.
         /// </summary>
-        /// <param name="error">Error as exception</param>
+        /// <param name="errorToSend">Error as exception</param>
         /// <returns>True if mail was sended successful, otherwise return False.</returns>
-        public static bool SendSupportEmail(Exception error)
-        {
+        public static bool SendSupportEmail(Exception errorToSend) 
+        { 
             try
             {
-                if( error == null)
+                if(errorToSend == null )
                 {
                     throw new ArgumentNullException("Error");
                 }
@@ -747,11 +754,11 @@ namespace ControlModul.Handlers.Loger
                 {
                     throw new SmtpFailedRecipientException();
                 }
-
-                string htmlMessage = $"<head><h1>Recieved error from:{error.Source}</h1></head>";
-                htmlMessage += $"<body><h2>Error:{error.Message}</h2>";
-                htmlMessage += $"<h3>Description:{error.Message}</h3>";
-                htmlMessage += $"<p>Stack Trace:{error.StackTrace}</p>";
+                //Prepare HTML message
+                string htmlMessage = $"<head><h1>Recieved error from:{errorToSend.Source}</h1></head>";
+                htmlMessage += $"<body><h2>Error:{errorToSend.Message}</h2>";
+                htmlMessage += $"<h3>Description:{errorToSend.Message}</h3>";
+                htmlMessage += $"<p>Stack Trace:{errorToSend.StackTrace}</p>";
                 htmlMessage += $"<p>Date/Time:{DateTime.Now}</p></body>";
                 SendEmailAsHTML(_supportEmail, _supportEmailPassword, _supportEmail, _supportEmailHost, _supportEmailPort, htmlMessage);
             }
