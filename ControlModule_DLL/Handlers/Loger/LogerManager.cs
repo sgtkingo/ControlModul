@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ControlModul.FileControl;
 using ControlModul.Handlers.Reporter;
+
+using FluentFTP;
 
 namespace ControlModul.Handlers.Loger
 {
@@ -14,30 +17,41 @@ namespace ControlModul.Handlers.Loger
     /// </summary>
     public static class LogerManager
     {
+        private static FtpClient _ftpClient;
+        private static Uri _ftpUri = null;
+
+        public static bool HasValidExternalBackupSet 
+        { 
+            get
+            {
+                return _ftpClient != null;
+            }
+        }
+
         private static int _daysDeleteLimit = 365;
-        public static int DaysDeleteLimit 
+        public static int DaysDeleteLimit
         {
-            get 
+            get
             {
                 return _daysDeleteLimit;
             }
-            set 
+            set
             {
-                if( value < 0 )
+                if (value < 0)
                 {
                     value *= -1;
                 }
                 _daysDeleteLimit = value;
-            } 
+            }
         }
 
-        public static string LogDirectory 
+        public static string LogDirectory
         {
-            get 
+            get
             {
                 return Loger.LogDir;
             }
-            set 
+            set
             {
                 try
                 {
@@ -47,25 +61,25 @@ namespace ControlModul.Handlers.Loger
                 {
                     throw ex;
                 }
-                
+
             }
         }
 
         private static string _targetDirectory;
-        public static string TargetDirectory 
+        public static string TargetDirectory
         {
-            get 
+            get
             {
                 return _targetDirectory;
             }
-            set 
+            set
             {
                 try
                 {
                     _targetDirectory = value;
                     if (string.IsNullOrEmpty(_targetDirectory))
                     {
-                        _targetDirectory = Path.Combine(LogDirectory,"backup");
+                        _targetDirectory = Path.Combine(LogDirectory, "backup");
                     }
                     if (!Directory.Exists(_targetDirectory))
                     {
@@ -83,7 +97,7 @@ namespace ControlModul.Handlers.Loger
 
         public static List<Report> Reports { get; private set; } = new List<Report>();
 
-        public static void Init(string logDir = null, string targetDir = null) 
+        public static void Init(string logDir = null, string targetDir = null)
         {
             try
             {
@@ -94,9 +108,34 @@ namespace ControlModul.Handlers.Loger
             {
                 throw ex;
             }
-        } 
+        }
 
-        public static List<Report> Load() 
+        public static void SetExternalBackup(Uri ftpUri, string username = null, string password = null)
+        {
+            try
+            {
+                if (ftpUri.Scheme != Uri.UriSchemeFtp)
+                {
+                    throw new UriFormatException();
+                }
+                else _ftpUri = ftpUri;
+
+                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                {
+                    _ftpClient = FTPManager.CreateClient(ftpUri);
+                }
+                else
+                {
+                    _ftpClient = FTPManager.CreateClient(ftpUri, username, password);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static List<Report> Load()
         {
             try
             {
@@ -149,13 +188,35 @@ namespace ControlModul.Handlers.Loger
             }
         }
 
-        private static void FileTransfer(string file, string targer)
+        public static void ExBackup(Report report)
         {
-            var targetfile = Path.Combine(targer, Path.GetFileName(file));
-            File.Copy(file, targetfile, true);
+            try
+            {
+                if (Reports.Contains(report))
+                {
+                    FTPManager.UploadFileAsync(_ftpClient, report.Source as string, _ftpUri.LocalPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public static IEnumerable<string> GetFileIndex(string path, string filter = "*.log") 
+        private static void FileTransfer(string file, string targer)
+        {
+            try
+            {
+                var targetfile = Path.Combine(targer, Path.GetFileName(file));
+                File.Copy(file, targetfile, true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static IEnumerable<string> GetFileIndex(string path, string filter = "*.log")
         {
             try
             {
@@ -164,10 +225,10 @@ namespace ControlModul.Handlers.Loger
             catch (Exception ex)
             {
                 throw ex;
-            }        
-        } 
+            }
+        }
 
-        public static void Maintanance() 
+        public static void Maintanance()
         {
             try
             {
@@ -176,11 +237,11 @@ namespace ControlModul.Handlers.Loger
                 foreach (var file in localIndex)
                 {
                     var writetime = File.GetLastWriteTime(file);
-                    if(  DateTime.Now.Subtract(writetime).TotalDays > DaysDeleteLimit )
+                    if (DateTime.Now.Subtract(writetime).TotalDays > DaysDeleteLimit)
                     {
                         File.Delete(file);
                     }
-                }     
+                }
             }
             catch (Exception ex)
             {
@@ -202,6 +263,18 @@ namespace ControlModul.Handlers.Loger
                 {
                     FileTransfer(file, TargetDirectory);
                 }
+            }
+            catch (Exception ex)
+            {
+                Loger.LogAndVisualize(ex);
+            }
+        }
+
+        public static void DoExternalBackUp() 
+        {
+            try
+            {
+                FTPManager.UploadDirectoryAsync(_ftpClient, LogDirectory, _ftpUri.LocalPath, FtpFolderSyncMode.Update);
             }
             catch (Exception ex)
             {

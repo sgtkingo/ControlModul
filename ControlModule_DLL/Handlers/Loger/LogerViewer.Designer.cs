@@ -43,6 +43,7 @@ namespace ControlModul.Handlers.Loger
             this.buttonDelete = new System.Windows.Forms.Button();
             this.checkBoxAll = new System.Windows.Forms.CheckBox();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonExBackup = new System.Windows.Forms.Button();
             this.groupBboxTools.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +68,7 @@ namespace ControlModul.Handlers.Loger
             // 
             // groupBboxTools
             // 
+            this.groupBboxTools.Controls.Add(this.buttonExBackup);
             this.groupBboxTools.Controls.Add(this.buttonSearch);
             this.groupBboxTools.Controls.Add(this.checkBoxInfo);
             this.groupBboxTools.Controls.Add(this.checkBoxWarnings);
@@ -163,7 +165,7 @@ namespace ControlModul.Handlers.Loger
             this.buttonBackUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonBackUp.Location = new System.Drawing.Point(76, 15);
             this.buttonBackUp.Name = "buttonBackUp";
-            this.buttonBackUp.Size = new System.Drawing.Size(101, 64);
+            this.buttonBackUp.Size = new System.Drawing.Size(100, 30);
             this.buttonBackUp.TabIndex = 9;
             this.buttonBackUp.Text = "BACKUP";
             this.buttonBackUp.UseVisualStyleBackColor = false;
@@ -204,6 +206,18 @@ namespace ControlModul.Handlers.Loger
             this.buttonRefresh.UseVisualStyleBackColor = false;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
+            // buttonExBackup
+            // 
+            this.buttonExBackup.BackColor = System.Drawing.Color.OrangeRed;
+            this.buttonExBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonExBackup.Location = new System.Drawing.Point(76, 46);
+            this.buttonExBackup.Name = "buttonExBackup";
+            this.buttonExBackup.Size = new System.Drawing.Size(100, 30);
+            this.buttonExBackup.TabIndex = 10;
+            this.buttonExBackup.Text = "EX BACKUP";
+            this.buttonExBackup.UseVisualStyleBackColor = false;
+            this.buttonExBackup.Click += new System.EventHandler(this.buttonExBackup_Click);
+            // 
             // LogerViewer
             // 
             this.AcceptButton = this.buttonSearch;
@@ -243,5 +257,6 @@ namespace ControlModul.Handlers.Loger
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.CheckBox checkBoxAll;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Button buttonExBackup;
     }
 }

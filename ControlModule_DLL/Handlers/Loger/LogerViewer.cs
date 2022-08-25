@@ -25,6 +25,7 @@ namespace ControlModul.Handlers.Loger
         private void LogerViewer_Load(object sender, EventArgs e)
         {
             Init();
+            buttonExBackup.Enabled = LogerManager.HasValidExternalBackupSet;
         }
 
         private void Init()
@@ -128,6 +129,24 @@ namespace ControlModul.Handlers.Loger
                 foreach (var report in reports)
                 {
                     LogerManager.Backup(report);
+                }
+
+                Loger.Info("Reports backup done!", true);
+            }
+            catch (Exception ex)
+            {
+                Loger.LogAndVisualize(ex);
+            }
+        }
+
+        private void buttonExBackup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var reports = GetCheckedReports();
+                foreach (var report in reports)
+                {
+                    LogerManager.ExBackup(report);
                 }
 
                 Loger.Info("Reports backup done!", true);
