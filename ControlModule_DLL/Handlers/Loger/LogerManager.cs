@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using ControlModul.FileControl;
 using ControlModul.Handlers.Reporter;
+using ControlModul.Protocols.FTP;
 
 using FluentFTP;
 
@@ -110,7 +111,7 @@ namespace ControlModul.Handlers.Loger
             }
         }
 
-        public static void SetExternalBackup(Uri ftpUri, string username = null, string password = null)
+        public static void SetExternalBackup(Uri ftpUri, string username = null, string password = "")
         {
             try
             {
@@ -120,7 +121,7 @@ namespace ControlModul.Handlers.Loger
                 }
                 else _ftpUri = ftpUri;
 
-                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                if (string.IsNullOrEmpty(username))
                 {
                     _ftpClient = FTPManager.CreateClient(ftpUri);
                 }
@@ -135,6 +136,15 @@ namespace ControlModul.Handlers.Loger
             }
         }
 
+        public static void UnsetExternalBackup()
+        {
+            if( _ftpClient !=null)
+            {
+                FTPManager.DiscardClient(_ftpClient);
+                _ftpClient = null;
+            }
+        }
+
         public static List<Report> Load()
         {
             try
@@ -142,7 +152,7 @@ namespace ControlModul.Handlers.Loger
                 Reports.Clear();
                 //TODO: Looks to LogDirectory and load all logs to Reports list
 
-                var index = GetFileIndex(LogDirectory);
+                var index = FileManager.GetDictonaryIndex(LogDirectory, "*.log");
                 foreach (var file in index)
                 {
                     var containment = File.ReadAllText(file);
@@ -179,7 +189,7 @@ namespace ControlModul.Handlers.Loger
             {
                 if (Reports.Contains(report))
                 {
-                    FileTransfer(report.Source as string, TargetDirectory);
+                    FileManager.FileTransfer(report.Source as string, TargetDirectory);
                 }
             }
             catch (Exception ex)
@@ -188,39 +198,14 @@ namespace ControlModul.Handlers.Loger
             }
         }
 
-        public static void ExBackup(Report report)
+        public async static void ExBackup(Report report)
         {
             try
             {
                 if (Reports.Contains(report))
                 {
-                    FTPManager.UploadFileAsync(_ftpClient, report.Source as string, _ftpUri.LocalPath);
+                    await FTPManager.UploadFileAsync(_ftpClient, report.Source as string, _ftpUri.LocalPath);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        private static void FileTransfer(string file, string targer)
-        {
-            try
-            {
-                var targetfile = Path.Combine(targer, Path.GetFileName(file));
-                File.Copy(file, targetfile, true);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public static IEnumerable<string> GetFileIndex(string path, string filter = "*.log")
-        {
-            try
-            {
-                return Directory.EnumerateFiles(path, filter);
             }
             catch (Exception ex)
             {
@@ -233,7 +218,7 @@ namespace ControlModul.Handlers.Loger
             try
             {
                 //TODO: Looks to LogDirectory and delete all logs older than DaysDeleteLimit
-                var localIndex = GetFileIndex(LogDirectory);
+                var localIndex = FileManager.GetDictonaryIndex(LogDirectory, "*.log");
                 foreach (var file in localIndex)
                 {
                     var writetime = File.GetLastWriteTime(file);
@@ -253,15 +238,10 @@ namespace ControlModul.Handlers.Loger
         {
             try
             {
-                var comparer = new IFileComparer();
-
-                var localIndex = GetFileIndex(LogDirectory);
-                var targetIndex = GetFileIndex(TargetDirectory);
-
-                var intersectIndex = localIndex.Except(targetIndex, comparer);
+                var intersectIndex = FileManager.GetDictonariesIntersect(LogDirectory, TargetDirectory, "*.log", "*.log");
                 foreach (var file in intersectIndex)
                 {
-                    FileTransfer(file, TargetDirectory);
+                    FileManager.FileTransfer(file, TargetDirectory);
                 }
             }
             catch (Exception ex)
@@ -270,28 +250,15 @@ namespace ControlModul.Handlers.Loger
             }
         }
 
-        public static void DoExternalBackUp() 
+        public async static void DoExternalBackUp() 
         {
             try
             {
-                FTPManager.UploadDirectoryAsync(_ftpClient, LogDirectory, _ftpUri.LocalPath, FtpFolderSyncMode.Update);
+                await FTPManager.UploadDirectoryAsync(_ftpClient, LogDirectory, _ftpUri.LocalPath, FtpFolderSyncMode.Update);
             }
             catch (Exception ex)
             {
                 Loger.LogAndVisualize(ex);
-            }
-        }
-
-        internal class IFileComparer : IEqualityComparer<string>
-        {
-            public bool Equals(string path1, string path2)
-            {
-                return Path.GetFileName(path1).Equals(Path.GetFileName(path2));
-            }
-
-            public int GetHashCode(string path)
-            {
-                return Path.GetFileName(path).GetHashCode();
             }
         }
     }

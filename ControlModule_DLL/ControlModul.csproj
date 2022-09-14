@@ -90,7 +90,7 @@
     </Compile>
     <Compile Include="FileControl\FileManager.cs" />
     <Compile Include="FileControl\FileSerializer.cs" />
-    <Compile Include="FileControl\FTPManager.cs" />
+    <Compile Include="Protocols\FTPManager.cs" />
     <Compile Include="FileControl\VirtualFile.cs" />
     <Compile Include="Handlers\Error\ErrorMessager.cs">
       <SubType>Form</SubType>

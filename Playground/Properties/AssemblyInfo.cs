@@ -1,27 +1,26 @@
-﻿using System.Resources;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // Obecné informace o sestavení se řídí přes následující 
 // sadu atributů. Změnou hodnot těchto atributů se upraví informace
 // přidružené k sestavení.
-[assembly: AssemblyTitle("Control Modul")]
-[assembly: AssemblyDescription("Universal data control module")]
+[assembly: AssemblyTitle("Playground")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Jiri Konecny")]
-[assembly: AssemblyProduct("ControlModul as DLL library")]
-[assembly: AssemblyCopyright("Copyright © Jiri Konecny  2021")]
-[assembly: AssemblyTrademark("MIT Licence")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Playground")]
+[assembly: AssemblyCopyright("Copyright ©  2022")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Nastavení ComVisible na false způsobí neviditelnost typů v tomto sestavení
 // pro komponenty modelu COM. Pokud potřebujete přístup k typu v tomto sestavení
-// modelu COM, nastavte atribut ComVisible daného typu na hodnotu True.
+// komponenty COM, nastavte atribut ComVisible daného typu na hodnotu true.
 [assembly: ComVisible(false)]
 
 // Následující GUID se používá pro ID knihovny typů, pokud je tento projekt vystavený pro COM.
-[assembly: Guid("7ed82d76-8c1b-4ab7-ad78-ff32f61c740c")]
+[assembly: Guid("ba373b11-4d86-4b90-9523-d6b90a00a859")]
 
 // Informace o verzi sestavení se skládá z těchto čtyř hodnot:
 //
@@ -33,6 +32,5 @@ using System.Runtime.InteropServices;
 // Můžete zadat všechny hodnoty nebo nastavit výchozí číslo buildu a revize
 // pomocí zástupného znaku * takto:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.09.140")]
-[assembly: AssemblyFileVersion("1.2.09.140")]
-[assembly: NeutralResourcesLanguage("en")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

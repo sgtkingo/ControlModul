@@ -31,6 +31,7 @@ namespace ModuleTester
         {
             this.buttonTestFTP = new System.Windows.Forms.Button();
             this.buttonLogViewerTest = new System.Windows.Forms.Button();
+            this.buttonLogerManagerTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonTestFTP
@@ -47,7 +48,7 @@ namespace ModuleTester
             // buttonLogViewerTest
             // 
             this.buttonLogViewerTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonLogViewerTest.Location = new System.Drawing.Point(168, 12);
+            this.buttonLogViewerTest.Location = new System.Drawing.Point(302, 12);
             this.buttonLogViewerTest.Name = "buttonLogViewerTest";
             this.buttonLogViewerTest.Size = new System.Drawing.Size(139, 118);
             this.buttonLogViewerTest.TabIndex = 1;
@@ -55,11 +56,23 @@ namespace ModuleTester
             this.buttonLogViewerTest.UseVisualStyleBackColor = true;
             this.buttonLogViewerTest.Click += new System.EventHandler(this.buttonLogViewerTest_Click);
             // 
+            // buttonLogerManagerTest
+            // 
+            this.buttonLogerManagerTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonLogerManagerTest.Location = new System.Drawing.Point(157, 12);
+            this.buttonLogerManagerTest.Name = "buttonLogerManagerTest";
+            this.buttonLogerManagerTest.Size = new System.Drawing.Size(139, 118);
+            this.buttonLogerManagerTest.TabIndex = 2;
+            this.buttonLogerManagerTest.Text = "LogerManager test";
+            this.buttonLogerManagerTest.UseVisualStyleBackColor = true;
+            this.buttonLogerManagerTest.Click += new System.EventHandler(this.buttonLogerManagerTest_Click);
+            // 
             // TesterUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 478);
+            this.Controls.Add(this.buttonLogerManagerTest);
             this.Controls.Add(this.buttonLogViewerTest);
             this.Controls.Add(this.buttonTestFTP);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -75,5 +88,6 @@ namespace ModuleTester
 
         private System.Windows.Forms.Button buttonTestFTP;
         private System.Windows.Forms.Button buttonLogViewerTest;
+        private System.Windows.Forms.Button buttonLogerManagerTest;
     }
 }

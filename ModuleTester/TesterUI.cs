@@ -9,7 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ControlModul.FileControl;
 using ControlModul.Handlers.Loger;
+using ControlModul.Protocols.FTP;
+
+using FluentFTP;
 
 namespace ModuleTester
 {
@@ -52,6 +56,16 @@ namespace ModuleTester
                 Loger.Error($"{((Control)sender).Text} tests run result: FAIL!!!", true);
         }
 
+        private void buttonLogerManagerTest_Click(object sender, EventArgs e)
+        {
+            if (TestLogerManager())
+            {
+                Loger.Info($"{((Control)sender).Text} tests run result: OK!", true);
+            }
+            else
+                Loger.Error($"{((Control)sender).Text} tests run result: FAIL!!!", true);
+        }
+
         private void buttonLogViewerTest_Click(object sender, EventArgs e)
         {
             if (TestLogerViewer())
@@ -68,7 +82,33 @@ namespace ModuleTester
         {
             try
             {
-                //Test code here
+                Uri host = new Uri("ftp://127.0.0.1:21");
+                FTPManager.SkipCertificateValidation = true;
+                var client = FTPManager.CreateClient(host, "test");
+                /*
+                FtpClient client = new FtpClient(host,"test", "");
+
+                client.DataConnectionEncryption = true;
+                client.EncryptionMode = FtpEncryptionMode.Auto;
+                client.ValidateAnyCertificate = true;
+
+                client.ValidateCertificate += FTPManager.ValidatingCertificate;
+                // connect to the server and automatically detect working FTP settings
+                var profile = client.AutoConnect();
+                */
+                
+
+                foreach (var item in FTPManager.ListDirectory(client))
+                {
+                    Debug.WriteLine(item);
+                }
+                if( FTPManager.UploadFile(client, @".\test.txt") == FtpStatus.Success)
+                {
+                    Loger.Info("File upload success!", true);
+                }
+                //client.UploadFile(@".\test.txt", @"\test.txt");
+
+                FTPManager.DiscardClient(client);
             }
             catch (Exception ex)
             {
@@ -77,10 +117,31 @@ namespace ModuleTester
             }
             return true;
         }
+
+        private bool TestLogerManager()
+        {
+            try
+            {
+                LogerManager.Init(@"./log");
+                LogerManager.DoBackup();
+                LogerManager.Maintanance();
+            }
+            catch (Exception ex)
+            {
+                Loger.LogAndVisualize(ex);
+                return false;
+            }
+            return true;
+        }
+
         private bool TestLogerViewer()
         {
             try
             {
+                Uri host = new Uri("ftp://127.0.0.1:21/logs");
+                FTPManager.SkipCertificateValidation = true;
+
+                LogerManager.SetExternalBackup(host, "test");
                 var form = new LogerViewer();
                 form.Show(this);
             }

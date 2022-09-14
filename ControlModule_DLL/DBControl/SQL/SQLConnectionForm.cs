@@ -185,13 +185,13 @@ namespace ControlModul.DBControl.SQL
             switch (state)
             {
                 case TestState.OK:
-                    SetColorToForm(Color.LightGreen);
+                    _ = SetColorToForm(Color.LightGreen);
                     break;
                 case TestState.FAIL:
-                    SetColorToForm(Color.Red, 2000);
+                    _ = SetColorToForm(Color.Red, 2000);
                     break;
                 case TestState.NOT_TESTED:
-                    SetColorToForm(Color.Yellow, 2000);
+                    _ = SetColorToForm(Color.Yellow, 2000);
                     break;
                 default:
                     break;
@@ -306,7 +306,7 @@ namespace ControlModul.DBControl.SQL
         private void btn_Test_Click(object sender, EventArgs e)
         {
             string connectionString = BuildConnectionString();
-            WaitToTesting(connectionString);
+            _ = WaitToTesting(connectionString);
         }
 
         private void btn_Reload_Click(object sender, EventArgs e)

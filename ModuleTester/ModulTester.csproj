@@ -44,10 +44,14 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentFTP, Version=39.4.0.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.39.4.0\lib\net45\FluentFTP.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -60,11 +64,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProccesWorkerTestForm.cs" />
+    <Compile Include="ProccesWorkerTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ProccesWorkerTestForm.Designer.cs">
       <DependentUpon>ProccesWorkerTestForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TesterForm.cs" />
+    <Compile Include="TesterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TesterForm.Designer.cs">
       <DependentUpon>TesterForm.cs</DependentUpon>
     </Compile>
