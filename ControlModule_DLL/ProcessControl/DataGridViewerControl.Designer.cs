@@ -34,33 +34,35 @@ namespace ControlModul.ProcessControl
             this.dataGridViewObjects = new System.Windows.Forms.DataGridView();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingSource_Data = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorEditItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripTextBox_Search = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripLabel_Search = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingSource_Data = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorEditItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.refreshToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openSourceToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.processWorker = new ControlModul.ProcessControl.ProcessWorker();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
@@ -127,66 +129,6 @@ namespace ControlModul.ProcessControl
             this.bindingNavigator.TabIndex = 1;
             this.bindingNavigator.Text = "bindingNavigator1";
             // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
-            this.bindingNavigatorCountItem.Text = "z {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Celkový počet položek";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Umístění";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Aktuální pozice";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripTextBox_Search
-            // 
-            this.toolStripTextBox_Search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripTextBox_Search.Name = "toolStripTextBox_Search";
-            this.toolStripTextBox_Search.Size = new System.Drawing.Size(250, 25);
-            this.toolStripTextBox_Search.ToolTipText = "Zadej hledaný výraz...";
-            // 
-            // toolStripLabel_Search
-            // 
-            this.toolStripLabel_Search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel_Search.Name = "toolStripLabel_Search";
-            this.toolStripLabel_Search.Size = new System.Drawing.Size(41, 22);
-            this.toolStripLabel_Search.Text = "Hledej";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator
-            // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
             // bindingNavigatorAddNewItem
             // 
             this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -202,6 +144,13 @@ namespace ControlModul.ProcessControl
             this.bindingSource_Data.AllowNew = true;
             this.bindingSource_Data.DataSourceChanged += new System.EventHandler(this.bindingSource_Data_DataSourceChanged);
             this.bindingSource_Data.CurrentChanged += new System.EventHandler(this.bindingSource_Data_CurrentChanged);
+            // 
+            // bindingNavigatorCountItem
+            // 
+            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(29, 22);
+            this.bindingNavigatorCountItem.Text = "z {0}";
+            this.bindingNavigatorCountItem.ToolTipText = "Celkový počet položek";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -221,6 +170,26 @@ namespace ControlModul.ProcessControl
             this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMovePreviousItem.Text = "Přesunout na předchozí";
             // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            // 
+            // bindingNavigatorPositionItem
+            // 
+            this.bindingNavigatorPositionItem.AccessibleName = "Umístění";
+            this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
+            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
+            this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.ToolTipText = "Aktuální pozice";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
             // bindingNavigatorMoveNextItem
             // 
             this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -238,6 +207,11 @@ namespace ControlModul.ProcessControl
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Přesunout na poslední";
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // bindingNavigatorEditItem
             // 
@@ -259,6 +233,26 @@ namespace ControlModul.ProcessControl
             this.bindingNavigatorDeleteItem.Text = "&Odstranit";
             this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.DeleteCurrent_Event);
             // 
+            // toolStripTextBox_Search
+            // 
+            this.toolStripTextBox_Search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripTextBox_Search.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStripTextBox_Search.Name = "toolStripTextBox_Search";
+            this.toolStripTextBox_Search.Size = new System.Drawing.Size(250, 25);
+            this.toolStripTextBox_Search.ToolTipText = "Zadej hledaný výraz...";
+            // 
+            // toolStripLabel_Search
+            // 
+            this.toolStripLabel_Search.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel_Search.Name = "toolStripLabel_Search";
+            this.toolStripLabel_Search.Size = new System.Drawing.Size(41, 22);
+            this.toolStripLabel_Search.Text = "Hledej";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // refreshToolStripButton
             // 
             this.refreshToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -277,6 +271,7 @@ namespace ControlModul.ProcessControl
             this.openSourceToolStripButton.Name = "openSourceToolStripButton";
             this.openSourceToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.openSourceToolStripButton.Text = "Otevřít zdroj";
+            this.openSourceToolStripButton.Click += new System.EventHandler(this.openSourceToolStripButton_Click);
             // 
             // saveToolStripButton
             // 
@@ -297,6 +292,11 @@ namespace ControlModul.ProcessControl
             this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.printToolStripButton.Text = "&Tisk";
             this.printToolStripButton.Click += new System.EventHandler(this.printToolStripButton_Click);
+            // 
+            // toolStripSeparator
+            // 
+            this.toolStripSeparator.Name = "toolStripSeparator";
+            this.toolStripSeparator.Size = new System.Drawing.Size(6, 25);
             // 
             // cutToolStripButton
             // 
@@ -328,6 +328,11 @@ namespace ControlModul.ProcessControl
             this.pasteToolStripButton.Text = "&Vložit";
             this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // helpToolStripButton
             // 
             this.helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -349,10 +354,26 @@ namespace ControlModul.ProcessControl
             this.processWorker.WorkerName = "Databáze";
             this.processWorker.WorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.GetWorkerResult);
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "Excel files|*.xlsx|Text files|*.txt";
+            this.openFileDialog.InitialDirectory = "%desktop%";
+            this.openFileDialog.Title = "Select file as source of data";
+            // 
+            // propertyGrid
+            // 
+            this.propertyGrid.Location = new System.Drawing.Point(457, 28);
+            this.propertyGrid.Name = "propertyGrid";
+            this.propertyGrid.Size = new System.Drawing.Size(343, 396);
+            this.propertyGrid.TabIndex = 4;
+            this.toolTip.SetToolTip(this.propertyGrid, "Object properities");
+            // 
             // DataGridViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.propertyGrid);
             this.Controls.Add(this.bindingNavigator);
             this.Controls.Add(this.processWorker);
             this.Controls.Add(this.dataGridViewObjects);
@@ -401,5 +422,7 @@ namespace ControlModul.ProcessControl
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton openSourceToolStripButton;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.PropertyGrid propertyGrid;
     }
 }

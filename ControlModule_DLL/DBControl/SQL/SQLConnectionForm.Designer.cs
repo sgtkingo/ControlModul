@@ -255,7 +255,7 @@ namespace ControlModul.DBControl.SQL
             // 
             // btnShowPassword
             // 
-            this.btnShowPassword.BackgroundImage = global::ControlModul.Properties.Resources.Eye_Scan_icon;
+            this.btnShowPassword.BackgroundImage = global::ControlModul.Properties.Resources.scan_icon;
             this.btnShowPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnShowPassword.Location = new System.Drawing.Point(397, 19);
             this.btnShowPassword.Name = "btnShowPassword";

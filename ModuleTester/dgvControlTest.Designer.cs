@@ -35,9 +35,11 @@ namespace ModuleTester
             // dataGridViewerControl1
             // 
             this.dataGridViewerControl1.AllowDelete = true;
+            this.dataGridViewerControl1.AllowManualSourceSelect = false;
             this.dataGridViewerControl1.AllowModify = true;
             this.dataGridViewerControl1.AllowNew = true;
-            this.dataGridViewerControl1.AllowPrewiev = false;
+            this.dataGridViewerControl1.AllowOpen = false;
+            this.dataGridViewerControl1.AllowPreview = true;
             this.dataGridViewerControl1.DataSource = null;
             this.dataGridViewerControl1.DeleteItemDelegate = null;
             this.dataGridViewerControl1.HidenCollums = null;
@@ -45,7 +47,7 @@ namespace ModuleTester
             this.dataGridViewerControl1.Name = "dataGridViewerControl1";
             this.dataGridViewerControl1.PrintItemDelegate = null;
             this.dataGridViewerControl1.SaveChangesDelegate = null;
-            this.dataGridViewerControl1.ShowItemDelegate = null;
+            this.dataGridViewerControl1.OpenItemDelegate = null;
             this.dataGridViewerControl1.Size = new System.Drawing.Size(800, 480);
             this.dataGridViewerControl1.TabIndex = 0;
             // 

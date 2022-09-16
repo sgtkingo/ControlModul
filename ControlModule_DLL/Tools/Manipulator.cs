@@ -11,6 +11,12 @@ namespace ControlModul.Tools
 {
     public static class Manipulator
     {
+        ///<summary>
+        ///Copy object to Clipboard
+        ///</summary>
+        ///<param name="item">
+        ///Must implement attribut [Serializable]
+        ///</param>
         public static void CopyObject(object item)
         {
             try
@@ -22,8 +28,14 @@ namespace ControlModul.Tools
                 Loger.Log(ex);
             }
         }
-        
-        public static T PasteObject<T>()
+
+        ///<summary>
+        ///Paste object from Clipboard
+        ///</summary>
+        ///<returns>
+        ///Object casted to T or default 
+        ///</returns>
+        public static T PasteObject<T>(bool autoclear = true)
         {
             try
             {
@@ -34,6 +46,10 @@ namespace ControlModul.Tools
             {
                 Loger.Log(ex);
                 return default(T);
+            }
+            if( autoclear) 
+            {
+                ClearClipboard();
             }
         }
 

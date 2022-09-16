@@ -25,7 +25,7 @@ namespace ControlModul.ProcessControl
         }
 
         [Category("Hide")]
-        public Func<object, bool> ShowItemDelegate { get; set; }
+        public Func<object, bool> OpenItemDelegate { get; set; }
         [Category("Hide")]
         public Func<object, bool> DeleteItemDelegate { get; set; }
 
@@ -33,7 +33,7 @@ namespace ControlModul.ProcessControl
         public Func<bool> SaveChangesDelegate { get; set; }
 
         [Category("Hide")]
-        public Action PrintItemDelegate { get; set; }
+        public Action<object> PrintItemDelegate { get; set; }
 
 
         [DisplayName("HidenCollums"), Category("Data")]
@@ -52,11 +52,16 @@ namespace ControlModul.ProcessControl
         [DisplayName("AllowOpen"), Category("Behavior")]
         public bool AllowOpen { get; set; } = true;
 
-        [DisplayName("AllowPrewiev"), Category("Behavior")]
-        public bool AllowPrewiev { get; set; } = false;
+        [DisplayName("AllowPreview"), Category("Behavior")]
+        public bool AllowPreview { get; set; } = false;
+
+        [DisplayName("AllowManualSourceSelect"), Category("Behavior")]
+        public bool AllowManualSourceSelect { get; set; } = false;
+
+        [Category("Hide")]
+        public object SelectedItem { get; private set; }
 
         private Func<object> BindActionDelegate;
-        private object SelectedItem;
 
         public DataGridViewerControl()
         {
@@ -85,10 +90,11 @@ namespace ControlModul.ProcessControl
             //Modify
             dataGridViewObjects.EditMode = AllowModify ? DataGridViewEditMode.EditOnEnter : DataGridViewEditMode.EditProgrammatically;
             //Open
-            bindingNavigatorEditItem.Enabled = AllowOpen = ShowItemDelegate != null;
+            bindingNavigatorEditItem.Enabled = AllowOpen = OpenItemDelegate != null;
             //Prewiev
-            //TODO
-
+            propertyGrid.Enabled = propertyGrid.Visible = AllowPreview;
+            //Manual source select
+            openSourceToolStripButton.Enabled = AllowManualSourceSelect;
             //Save
             saveToolStripButton.Enabled = SaveChangesDelegate != null;
             //Print
@@ -107,7 +113,7 @@ namespace ControlModul.ProcessControl
         }
 
         /// <summary>
-        /// Method for binding source by delegate.
+        /// Method for binding source by delegate method.
         /// </summary>
         /// <param name="bindActionDelegate">
         /// MUST return bindable data, support list, table or other data sources.
@@ -118,6 +124,25 @@ namespace ControlModul.ProcessControl
             {
                 BindActionDelegate = bindActionDelegate;
                 processWorker.RunWorker(BindMethod_GetData);
+            }
+            catch (Exception ex)
+            {
+                Loger.LogAndVisualize(ex);
+            }
+        }
+
+        /// <summary>
+        /// Method for binding file as source .
+        /// </summary>
+        /// <param name="filePath">
+        /// Path to source file, suppport Excel, text and other common file formats.
+        /// </param>
+        public void BindSources(string filePath)
+        {
+            try
+            {
+                //TODO
+                throw new NotImplementedException();
             }
             catch (Exception ex)
             {
@@ -147,6 +172,7 @@ namespace ControlModul.ProcessControl
         private void bindingSource_Data_CurrentChanged(object sender, EventArgs e)
         {
             SelectedItem = bindingNavigator.BindingSource.Current;
+            PreviewItem(SelectedItem);
         }
 
         public void FillData(object data)
@@ -183,13 +209,23 @@ namespace ControlModul.ProcessControl
                 return;
             }
 
-            if (!ShowItemDelegate?.Invoke(item) ?? true)
+            if (!OpenItemDelegate?.Invoke(item) ?? true)
             {
                 Loger.Error("Chyba otevírání položky...", true);
             }
         }
 
-        public void DeleteItem(object item, bool overdrive = false)
+        private void PreviewItem(object item)
+        {
+            if (item == null || !AllowPreview)
+            {
+                return;
+            }
+
+            propertyGrid.SelectedObject = item;
+        }
+
+        private void DeleteItem(object item, bool overdrive = false)
         {
             try
             {
@@ -293,7 +329,7 @@ namespace ControlModul.ProcessControl
         {
             try
             {
-                PrintItemDelegate?.Invoke();
+                PrintItemDelegate?.Invoke(SelectedItem);
             }
             catch (Exception ex)
             {
@@ -326,6 +362,14 @@ namespace ControlModul.ProcessControl
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
             return;
+        }
+
+        private void openSourceToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                BindSources(openFileDialog.FileName);
+            }
         }
         #endregion
 

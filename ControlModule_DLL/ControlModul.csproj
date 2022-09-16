@@ -96,6 +96,11 @@
     <Compile Include="ProcessControl\DataGridViewerControl.Designer.cs">
       <DependentUpon>DataGridViewerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Protocols\FTPManager.cs" />
     <Compile Include="FileControl\VirtualFile.cs" />
     <Compile Include="Handlers\Error\ErrorMessager.cs">
@@ -128,11 +133,6 @@
       <DependentUpon>ProcessWorker.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Security\Hasher.cs" />
     <Compile Include="Security\SymetricCryptographer.cs" />
     <Compile Include="Templates\AbstractManager.cs" />
@@ -242,6 +242,43 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="control_modul.ico" />
+    <None Include="Resources\icons\icon.ico" />
+    <None Include="Resources\no_icon.png" />
+    <None Include="Resources\enviroment\programming-add-property-icon.png" />
+    <None Include="Resources\enviroment\gear-proccess.png" />
+    <None Include="Resources\enviroment\folder-save.png" />
+    <None Include="Resources\enviroment\errorIcon.png" />
+    <None Include="Resources\enviroment\editing-delete-icon.png" />
+    <None Include="Resources\enviroment\database-delete-icon.png" />
+    <None Include="Resources\enviroment\business-questions-icon.png" />
+    <None Include="Resources\enviroment\sql_logo.png" />
+    <None Include="Resources\enviroment\show-password-icon.png" />
+    <None Include="Resources\enviroment\scan-icon.png" />
+    <None Include="Resources\enviroment\programming-error-icon.png" />
+    <None Include="Resources\buttons\folder.png" />
+    <None Include="Resources\buttons\edit.png" />
+    <None Include="Resources\buttons\document-copy-icon.png" />
+    <None Include="Resources\buttons\diskette.png" />
+    <None Include="Resources\buttons\clear.png" />
+    <None Include="Resources\buttons\arrows-right-round-icon.png" />
+    <None Include="Resources\buttons\arrows-left-round-icon.png" />
+    <None Include="Resources\buttons\about.png" />
+    <None Include="Resources\buttons\table-select-row-icon.png" />
+    <None Include="Resources\buttons\table-row-insert-icon.png" />
+    <None Include="Resources\buttons\table-row-delete-icon.png" />
+    <None Include="Resources\buttons\refresh-icon.png" />
+    <None Include="Resources\buttons\plug-disconnect-prohibition-icon.png" />
+    <None Include="Resources\buttons\plug-disconnect-icon.png" />
+    <None Include="Resources\buttons\plug-connect-icon.png" />
+    <None Include="Resources\buttons\plug-arrow-icon.png" />
+    <None Include="Resources\buttons\mail-send-icon.png" />
+    <None Include="Resources\buttons\magnet-plus-icon.png" />
+    <None Include="Resources\buttons\magnet-pencil-icon.png" />
+    <None Include="Resources\buttons\magnet-exclamation-icon.png" />
+    <None Include="Resources\buttons\magnet-arrow-icon.png" />
+    <None Include="Resources\buttons\loading.png" />
+    <None Include="Resources\buttons\chat.png" />
+    <None Include="Resources\buttons\gear.png" />
     <None Include="Resources\pics\refresh-icon.png" />
     <None Include="Resources\pics\editing-delete-icon.png" />
     <None Include="Resources\pics\edit.png" />

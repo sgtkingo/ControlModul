@@ -19,8 +19,14 @@ namespace ModuleTester
 
         private void dgvControlTest_Load(object sender, EventArgs e)
         {
-            var source = new List<Foo> { new Foo() { MyProperty = 1 }, new Foo() { MyProperty = 2 }, new Foo() { MyProperty = 3 } };
-            dataGridViewerControl1.DataSource = source;
+            //var source = new List<Foo> { new Foo() { MyProperty = 1 }, new Foo() { MyProperty = 2 }, new Foo() { MyProperty = 3 } };
+            //dataGridViewerControl1.DataSource = source;
+            dataGridViewerControl1.BindSources(GetData);
+        }
+
+        public static List<Foo> GetData()
+        {
+            return new List<Foo> { new Foo() { MyProperty = 1 }, new Foo() { MyProperty = 2 }, new Foo() { MyProperty = 3 } };
         }
     }
 }

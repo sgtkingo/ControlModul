@@ -73,6 +73,36 @@ namespace ControlModul.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrows_left_round_icon {
+            get {
+                object obj = ResourceManager.GetObject("arrows_left_round_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrows_right_round_icon {
+            get {
+                object obj = ResourceManager.GetObject("arrows_right_round_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap business_questions_icon {
+            get {
+                object obj = ResourceManager.GetObject("business_questions_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap chat {
             get {
                 object obj = ResourceManager.GetObject("chat", resourceCulture);
@@ -146,16 +176,6 @@ namespace ControlModul.Properties {
         internal static System.Drawing.Bitmap errorIcon {
             get {
                 object obj = ResourceManager.GetObject("errorIcon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Eye_Scan_icon {
-            get {
-                object obj = ResourceManager.GetObject("Eye_Scan_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,6 +333,16 @@ namespace ControlModul.Properties {
         /// <summary>
         ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap no_icon {
+            get {
+                object obj = ResourceManager.GetObject("no_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap plug_arrow_icon {
             get {
                 object obj = ResourceManager.GetObject("plug_arrow_icon", resourceCulture);
@@ -376,6 +406,16 @@ namespace ControlModul.Properties {
         internal static System.Drawing.Bitmap refresh_icon {
             get {
                 object obj = ResourceManager.GetObject("refresh_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Vyhledává lokalizovaný prostředek typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap scan_icon {
+            get {
+                object obj = ResourceManager.GetObject("scan_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
