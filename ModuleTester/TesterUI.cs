@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 using ControlModul.FileControl;
 using ControlModul.Handlers.Loger;
+using ControlModul.ProcessControl;
 using ControlModul.Protocols.FTP;
 
 using FluentFTP;
@@ -69,6 +70,16 @@ namespace ModuleTester
         private void buttonLogViewerTest_Click(object sender, EventArgs e)
         {
             if (TestLogerViewer())
+            {
+                Loger.Info($"{((Control)sender).Text} tests run result: OK!", true);
+            }
+            else
+                Loger.Error($"{((Control)sender).Text} tests run result: FAIL!!!", true);
+        }
+
+        private void buttonDataViewControlTest_Click(object sender, EventArgs e)
+        {
+            if (TestDataViewControl())
             {
                 Loger.Info($"{((Control)sender).Text} tests run result: OK!", true);
             }
@@ -139,7 +150,6 @@ namespace ModuleTester
             try
             {
                 Uri host = new Uri("ftp://127.0.0.1:21/logs");
-                FTPManager.SkipCertificateValidation = true;
 
                 LogerManager.SetExternalBackup(host, "test");
                 var form = new LogerViewer();
@@ -152,6 +162,22 @@ namespace ModuleTester
             }
             return true;
         }
+
+        private bool TestDataViewControl()
+        {
+            try
+            {
+                var form = new dgvControlTest();
+                form.Show(this);
+            }
+            catch (Exception ex)
+            {
+                Loger.LogAndVisualize(ex);
+                return false;
+            }
+            return true;
+        }
         #endregion
+
     }
 }

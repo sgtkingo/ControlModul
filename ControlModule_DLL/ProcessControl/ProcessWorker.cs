@@ -21,6 +21,9 @@ namespace ControlModul.ProcessControl
         Canceled = 400
     }
 
+    /// <summary>
+    /// Async worker with GUI
+    /// </summary>
     public partial class ProcessWorker : UserControl
     {
         const int SHORT_TIME = 1000;

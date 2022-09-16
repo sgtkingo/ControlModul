@@ -25,7 +25,7 @@ namespace ControlModul.Protocols.FTP
     {
         public static bool SkipCertificateValidation { get; set; } = false;
 
-        public static X509Certificate TrustedRawCertData { get; set; }
+        public static X509Certificate TrustedCertificate { get; set; }
 
         public static void ValidatingCertificate(FtpClient control, FtpSslValidationEventArgs e)
         {
@@ -37,11 +37,11 @@ namespace ControlModul.Protocols.FTP
 
             if (e.PolicyErrors == SslPolicyErrors.None)
             {
-                if( TrustedRawCertData != null && e.Certificate.GetRawCertDataString().Equals(TrustedRawCertData.GetRawCertDataString())) 
+                if( TrustedCertificate != null && e.Certificate.GetRawCertDataString().Equals(TrustedCertificate.GetRawCertDataString())) 
                 {
                     e.Accept = true;
                 }
-                else if( TrustedRawCertData == null ) 
+                else if( TrustedCertificate == null ) 
                 {
                     e.Accept = true;
                 }

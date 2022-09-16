@@ -213,5 +213,10 @@ namespace ControlModul.Handlers.Loger
 
             richTextBoxReport.ScrollToCaret();
         }
+
+        private void LogerViewer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            LogerManager.UnsetExternalBackup();
+        }
     }
 }

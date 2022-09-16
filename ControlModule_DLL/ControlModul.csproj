@@ -90,6 +90,12 @@
     </Compile>
     <Compile Include="FileControl\FileManager.cs" />
     <Compile Include="FileControl\FileSerializer.cs" />
+    <Compile Include="ProcessControl\DataGridViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProcessControl\DataGridViewerControl.Designer.cs">
+      <DependentUpon>DataGridViewerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Protocols\FTPManager.cs" />
     <Compile Include="FileControl\VirtualFile.cs" />
     <Compile Include="Handlers\Error\ErrorMessager.cs">
@@ -132,6 +138,7 @@
     <Compile Include="Templates\AbstractManager.cs" />
     <Compile Include="Tools\Convertor.cs" />
     <Compile Include="Tools\Encoder.cs" />
+    <Compile Include="Tools\Manipulator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DBControl\SQL\SQLConnectionForm.resx">
@@ -148,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Handlers\Reporter\ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProcessControl\DataGridViewerControl.resx">
+      <DependentUpon>DataGridViewerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProcessControl\ProcessWorker.resx">
       <DependentUpon>ProcessWorker.cs</DependentUpon>
@@ -232,6 +242,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="control_modul.ico" />
+    <None Include="Resources\pics\refresh-icon.png" />
+    <None Include="Resources\pics\editing-delete-icon.png" />
+    <None Include="Resources\pics\edit.png" />
+    <None Include="Resources\pics\database-delete-icon.png" />
+    <None Include="Resources\pics\table-select-row-icon.png" />
+    <None Include="Resources\pics\table-row-insert-icon.png" />
+    <None Include="Resources\pics\table-row-delete-icon.png" />
+    <None Include="Resources\pics\show-password-icon.png" />
+    <None Include="Resources\pics\programming-error-icon.png" />
+    <None Include="Resources\pics\programming-add-property-icon.png" />
+    <None Include="Resources\pics\magnet-plus-icon.png" />
+    <None Include="Resources\pics\magnet-pencil-icon.png" />
+    <None Include="Resources\pics\magnet-exclamation-icon.png" />
+    <None Include="Resources\pics\magnet-arrow-icon.png" />
+    <None Include="Resources\pics\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

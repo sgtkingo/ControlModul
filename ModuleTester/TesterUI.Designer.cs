@@ -32,6 +32,7 @@ namespace ModuleTester
             this.buttonTestFTP = new System.Windows.Forms.Button();
             this.buttonLogViewerTest = new System.Windows.Forms.Button();
             this.buttonLogerManagerTest = new System.Windows.Forms.Button();
+            this.buttonDataViewControlTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonTestFTP
@@ -67,11 +68,23 @@ namespace ModuleTester
             this.buttonLogerManagerTest.UseVisualStyleBackColor = true;
             this.buttonLogerManagerTest.Click += new System.EventHandler(this.buttonLogerManagerTest_Click);
             // 
+            // buttonDataViewControlTest
+            // 
+            this.buttonDataViewControlTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonDataViewControlTest.Location = new System.Drawing.Point(447, 12);
+            this.buttonDataViewControlTest.Name = "buttonDataViewControlTest";
+            this.buttonDataViewControlTest.Size = new System.Drawing.Size(139, 118);
+            this.buttonDataViewControlTest.TabIndex = 3;
+            this.buttonDataViewControlTest.Text = "DataViewControlTest";
+            this.buttonDataViewControlTest.UseVisualStyleBackColor = true;
+            this.buttonDataViewControlTest.Click += new System.EventHandler(this.buttonDataViewControlTest_Click);
+            // 
             // TesterUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 478);
+            this.Controls.Add(this.buttonDataViewControlTest);
             this.Controls.Add(this.buttonLogerManagerTest);
             this.Controls.Add(this.buttonLogViewerTest);
             this.Controls.Add(this.buttonTestFTP);
@@ -89,5 +102,6 @@ namespace ModuleTester
         private System.Windows.Forms.Button buttonTestFTP;
         private System.Windows.Forms.Button buttonLogViewerTest;
         private System.Windows.Forms.Button buttonLogerManagerTest;
+        private System.Windows.Forms.Button buttonDataViewControlTest;
     }
 }

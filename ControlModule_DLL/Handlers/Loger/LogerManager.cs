@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -111,7 +112,7 @@ namespace ControlModul.Handlers.Loger
             }
         }
 
-        public static void SetExternalBackup(Uri ftpUri, string username = null, string password = "")
+        public static void SetExternalBackup(Uri ftpUri, string username = null, string password = "", bool useDataEncryption = true, FtpEncryptionMode encryptionMode = FtpEncryptionMode.Auto, X509Certificate trustedCertificate = null)
         {
             try
             {
@@ -121,13 +122,24 @@ namespace ControlModul.Handlers.Loger
                 }
                 else _ftpUri = ftpUri;
 
-                if (string.IsNullOrEmpty(username))
+                if( trustedCertificate != null ) 
                 {
-                    _ftpClient = FTPManager.CreateClient(ftpUri);
+                    FTPManager.TrustedCertificate = trustedCertificate;
+                    FTPManager.SkipCertificateValidation = false;
                 }
                 else
                 {
-                    _ftpClient = FTPManager.CreateClient(ftpUri, username, password);
+                    FTPManager.TrustedCertificate = null;
+                    FTPManager.SkipCertificateValidation = true;
+                }
+
+                if (string.IsNullOrEmpty(username))
+                {
+                    _ftpClient = FTPManager.CreateClient(ftpUri, useDataEncryption, encryptionMode);
+                }
+                else
+                {
+                    _ftpClient = FTPManager.CreateClient(ftpUri, username, password, useDataEncryption, encryptionMode);
                 }
             }
             catch (Exception ex)
