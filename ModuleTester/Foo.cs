@@ -11,5 +11,10 @@ namespace ModuleTester
     {
         public int ID { get; set; }
         public string MyProperty { get; set; }
+
+        public override string ToString()
+        {
+            return $"{ID} {MyProperty}";
+        }
     }
 }

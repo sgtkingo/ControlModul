@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 
 using ControlModul.DataControl;
@@ -27,11 +29,28 @@ namespace ControlModul.ProcessControl
             }
         }
         //Actions
-        public Func<object, bool> OpenItemDelegate;
-        public Func<object, bool> DeleteItemDelegate;
-        public Func<bool> SaveChangesDelegate;
-        public Action<object> PrintItemDelegate;
+        public Func<object, bool> OpenItemActionDelegate;
+        public Func<object, bool> DeleteItemActionDelegate;
 
+        public Func<bool> SaveChangesActionDelegate;
+
+        public Action<object> PrintItemActionDelegate;
+
+        //Help
+        [DisplayName("HelpFile"), Category("Help")]
+        public string HelpFile 
+        {
+            get 
+            {
+                return helpProvider.HelpNamespace;
+            }
+            set
+            {
+                helpProvider.HelpNamespace = value;
+            }
+        }
+
+        //Style and Behavior
         [DisplayName("HidenCollums"), Category("Filters")]
         public string[] HidenCollums { get; set; }
 
@@ -54,8 +73,35 @@ namespace ControlModul.ProcessControl
         [DisplayName("AllowManualSourceSelect"), Category("Behavior")]
         public bool AllowManualSourceSelect { get; set; } = false;
 
+        //Public members
         [Category("Hide")]
-        public object SelectedItem { get; private set; }
+        public object SelectedItem 
+        {
+            get 
+            {
+                return bindingNavigator.BindingSource.Current;
+            } 
+        }
+
+        [Category("DataGridView Properities")]
+        public DataGridView DataGridView { get; private set; }
+
+        //Private members
+        private bool _unsavedChanges;
+        private bool UnsavedChanges 
+        {
+            get 
+            {
+                return _unsavedChanges;
+            }
+            set 
+            {
+                _unsavedChanges = value;
+                saveToolStripButton.Enabled = value && SaveChangesActionDelegate != null;
+            } 
+        }
+
+        private bool WasCutted = false;
 
         //Data provider
         private IDataProvider _DataProvider;
@@ -67,6 +113,13 @@ namespace ControlModul.ProcessControl
 
         private void DataGridViewerControl_Load(object sender, EventArgs e)
         {
+            Init();
+        }
+
+        private void Init()
+        {
+            DataGridView = dataGridViewObjects;
+
             InitControl();
         }
 
@@ -87,18 +140,22 @@ namespace ControlModul.ProcessControl
             //Modify
             dataGridViewObjects.EditMode = AllowModify ? DataGridViewEditMode.EditOnEnter : DataGridViewEditMode.EditProgrammatically;
             //Open
-            bindingNavigatorEditItem.Enabled = AllowOpen = OpenItemDelegate != null;
+            bindingNavigatorEditItem.Enabled = AllowOpen = OpenItemActionDelegate != null;
             //Prewiev
-            propertyGrid.Enabled = propertyGrid.Visible = AllowPreview;
+            propertyGrid.Enabled = propertyGrid.Visible = toolStripMenuItemShowPrewiev.Checked = AllowPreview;
             //Manual source select
             openSourceToolStripButton.Enabled = AllowManualSourceSelect;
             //Save
-            saveToolStripButton.Enabled = SaveChangesDelegate != null;
+            saveToolStripButton.Enabled = SaveChangesActionDelegate != null;
             //Print
-            printToolStripButton.Enabled = PrintItemDelegate != null;
-            //Help
-            //TODO
-            helpToolStripButton.Enabled = false;
+            printToolStripButton.Enabled = PrintItemActionDelegate != null;
+
+            //CopyCutPaste
+            pasteToolStripButton.Enabled = Manipulator.Exist();
+
+            //Context menu
+            fillToolStripMenuItem.Checked = dataGridViewObjects.AutoSizeColumnsMode == DataGridViewAutoSizeColumnsMode.Fill;
+            autoToolStripMenuItem.Checked = dataGridViewObjects.AutoSizeColumnsMode == DataGridViewAutoSizeColumnsMode.ColumnHeader; ;
 
             //Refresh control
             this.Refresh();
@@ -161,14 +218,25 @@ namespace ControlModul.ProcessControl
         private void bindingSource_Data_DataSourceChanged(object sender, EventArgs e)
         {
             dataGridViewObjects.DataSource = bindingNavigator.BindingSource;
-            //Show columns by name
+            //Hide columns by name
             HideColumns(HidenCollums);
+            //Create new list
+            CreateColumsToolStripList();
         }
 
         private void bindingSource_Data_CurrentChanged(object sender, EventArgs e)
         {
-            SelectedItem = bindingNavigator.BindingSource.Current;
             PreviewItem(SelectedItem);
+        }
+
+        private void bindingSource_Data_CurrentItemChanged(object sender, EventArgs e)
+        {
+            UnsavedChanges = true;
+        }
+
+        private void bindingSource_Data_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            UnsavedChanges = true;
         }
 
         public void FillData(object data)
@@ -205,7 +273,7 @@ namespace ControlModul.ProcessControl
                 return;
             }
 
-            if (!OpenItemDelegate?.Invoke(item) ?? true)
+            if (!OpenItemActionDelegate?.Invoke(item) ?? true)
             {
                 Loger.Error("Chyba otevírání položky...", true);
             }
@@ -230,12 +298,12 @@ namespace ControlModul.ProcessControl
                 if (overdrive)
                 {
                     bindingNavigator.BindingSource.Remove(item);
-                    DeleteItemDelegate?.Invoke(item);
+                    DeleteItemActionDelegate?.Invoke(item);
                 }
                 else if (UserTryDeleteItem(item))
                 {
                     bindingNavigator.BindingSource.Remove(item);
-                    DeleteItemDelegate?.Invoke(item);
+                    DeleteItemActionDelegate?.Invoke(item);
                 }
             }
             catch (Exception ex)
@@ -259,8 +327,7 @@ namespace ControlModul.ProcessControl
         {
             try
             {
-                var item = bindingNavigator.BindingSource.Current;
-                ShowItem(item);
+                ShowItem(SelectedItem);
             }
             catch (Exception ex)
             {
@@ -272,8 +339,7 @@ namespace ControlModul.ProcessControl
         {
             try
             {
-                var item = bindingNavigator.BindingSource.Current;
-                DeleteItem(item);
+                DeleteItem(SelectedItem);
             }
             catch (Exception ex)
             {
@@ -298,8 +364,7 @@ namespace ControlModul.ProcessControl
         {
             try
             {
-                var item = bindingNavigator.BindingSource.Current;
-                e.Cancel = !this.UserTryDeleteItem(item);
+                e.Cancel = !this.UserTryDeleteItem(SelectedItem);
             }
             catch (Exception ex)
             {
@@ -311,9 +376,15 @@ namespace ControlModul.ProcessControl
         #region Navigator_Events
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
+            SaveChanges();
+        }
+
+        private void SaveChanges()
+        {
             try
             {
-                SaveChangesDelegate?.Invoke();
+                SaveChangesActionDelegate?.Invoke();
+                UnsavedChanges = false;
             }
             catch (Exception ex)
             {
@@ -323,9 +394,14 @@ namespace ControlModul.ProcessControl
 
         private void printToolStripButton_Click(object sender, EventArgs e)
         {
+            PrintCurrent(SelectedItem);
+        }
+
+        private void PrintCurrent(object item)
+        {
             try
             {
-                PrintItemDelegate?.Invoke(SelectedItem);
+                PrintItemActionDelegate?.Invoke(item);
             }
             catch (Exception ex)
             {
@@ -335,29 +411,50 @@ namespace ControlModul.ProcessControl
 
         private void cutToolStripButton_Click(object sender, EventArgs e)
         {
-            var item = bindingNavigator.BindingSource.Current;
+            Manipulator.CopyObject(SelectedItem);
+            DeleteItem(SelectedItem, true);
 
-            Manipulator.CopyObject(item);
-            DeleteItem(item, true);
+            WasCutted = true;
+            pasteToolStripButton.Enabled = true;
+            copyToolStripButton.Enabled = false;
         }
 
         private void copyToolStripButton_Click(object sender, EventArgs e)
         {
-            var item = bindingNavigator.BindingSource.Current;
+            Manipulator.CopyObject(SelectedItem);
 
-            Manipulator.CopyObject(item);
+            WasCutted = false;
+            pasteToolStripButton.Enabled = true;
         }
 
         private void pasteToolStripButton_Click(object sender, EventArgs e)
         {
-            var item = Manipulator.PasteObject<object>(true);
-
+            var item = Manipulator.PasteObject<object>(WasCutted);
             AddItem(item);
+
+            if( WasCutted )
+            {
+                pasteToolStripButton.Enabled = false;
+                copyToolStripButton.Enabled = true;
+            }
         }
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
-            return;
+            try
+            {
+                if( string.IsNullOrEmpty(HelpFile) || !File.Exists(HelpFile) )
+                {
+                    MessageBox.Show("Help file cant be found, try to use F1 please...", "Help");
+                    return;
+                }
+
+                Process.Start(HelpFile);
+            }
+            catch (Exception ex)
+            {
+                Loger.Log(ex);
+            }
         }
 
         private void openSourceToolStripButton_Click(object sender, EventArgs e)
@@ -377,16 +474,21 @@ namespace ControlModul.ProcessControl
 
             if (collumnsNames == null)
                 return;
-            foreach (var collumnName in collumnsNames)
+            foreach (var columnName in collumnsNames)
             {
-                if (!dataGridViewObjects.Columns.Contains(collumnName))
-                    continue;
-
-                dataGridViewObjects.Columns[collumnName].Visible = false;
+                SetColumnVisibility(columnName, false);
             }
 
             dataGridViewObjects.Refresh();
             this.Refresh();
+        }
+
+        private void SetColumnVisibility(string columnName, bool visible)
+        {
+            if (!dataGridViewObjects.Columns.Contains(columnName))
+                return;
+
+            dataGridViewObjects.Columns[columnName].Visible = visible;
         }
 
         public void Search(string searchText, string collumnName)
@@ -397,6 +499,61 @@ namespace ControlModul.ProcessControl
         private void toolStripTextBox_Search_TextChanged(object sender, EventArgs e)
         {
             this.Search(toolStripLabel_Search.Text, "*");
+        }
+        #endregion
+
+        #region ContextMenu
+        private void toolStripMenuItemShowPrewiev_Click(object sender, EventArgs e)
+        {
+            AllowPreview =! AllowPreview;
+            propertyGrid.Enabled = propertyGrid.Visible = toolStripMenuItemShowPrewiev.Checked = AllowPreview;
+        }
+
+        private void CreateColumsToolStripList()
+        {
+            this.columnsToolStripMenuItem.DropDownItems.Clear();
+            foreach (DataGridViewColumn collumn in dataGridViewObjects.Columns)
+            {
+                var toolStripMenuItem = new ToolStripMenuItem();
+                toolStripMenuItem.Name = collumn.Name;
+                toolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+                toolStripMenuItem.Text = collumn.HeaderText;
+                toolStripMenuItem.Checked = collumn.Visible;
+                toolStripMenuItem.Click += toolStripMenuItemColumns_Click;
+
+                this.columnsToolStripMenuItem.DropDownItems.Add(toolStripMenuItem);
+            }
+        }
+
+        private void toolStripMenuItemColumns_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToolStripMenuItem toolStripButton = (ToolStripMenuItem)sender;
+                toolStripButton.Checked = !toolStripButton.Checked;
+
+                SetColumnVisibility(toolStripButton.Name, toolStripButton.Checked);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        private void fillToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewObjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            fillToolStripMenuItem.Checked = true;
+            autoToolStripMenuItem.Checked = false;
+        }
+
+        private void autoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataGridViewObjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+
+            fillToolStripMenuItem.Checked = false;
+            autoToolStripMenuItem.Checked = true;
         }
         #endregion
 
@@ -428,5 +585,21 @@ namespace ControlModul.ProcessControl
             }
         }
         #endregion
+
+        //Leave event
+        private void DataGridViewerControl_Leave(object sender, EventArgs e)
+        {
+            if (UnsavedChanges)
+            {
+                if (MessageBox.Show(
+                    "Unsaved changes detected, do you want save them?",
+                    "UnsavedChanges",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Hand) == DialogResult.Yes)
+                {
+                    SaveChanges();
+                }
+            }
+        }
     }
 }

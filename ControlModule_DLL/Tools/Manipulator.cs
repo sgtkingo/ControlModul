@@ -17,11 +17,11 @@ namespace ControlModul.Tools
         ///<param name="item">
         ///Must implement attribut [Serializable]
         ///</param>
-        public static void CopyObject(object item)
+        public static void CopyObject(object item, string itemName = "ItemCopy")
         {
             try
             {
-                Clipboard.SetData("ItemCopy", item);
+                Clipboard.SetData(itemName, item);
             }
             catch (Exception ex)
             {
@@ -35,11 +35,11 @@ namespace ControlModul.Tools
         ///<returns>
         ///Object casted to T or default 
         ///</returns>
-        public static T PasteObject<T>(bool autoclear = true)
+        public static T PasteObject<T>(bool autoclear = true, string itemName = "ItemCopy")
         {
             try
             {
-                var item = Clipboard.GetData("ItemCopy");
+                var item = Clipboard.GetData(itemName);
                 if (autoclear)
                 {
                     ClearClipboard();
@@ -53,6 +53,24 @@ namespace ControlModul.Tools
             }
         }
 
+        ///<summary>
+        ///Test if object is in the Clipboard
+        ///</summary>
+        public static bool Exist(string itemName = "ItemCopy")
+        {
+            try
+            {
+                return Clipboard.GetData(itemName) != null;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        ///<summary>
+        ///Clear all objects from Clipboard permanently
+        ///</summary>
         public static void ClearClipboard()
         {
             Clipboard.Clear();

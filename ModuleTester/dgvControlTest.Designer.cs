@@ -41,11 +41,12 @@ namespace ModuleTester
             this.dataGridViewerControl1.AllowOpen = false;
             this.dataGridViewerControl1.AllowPreview = true;
             this.dataGridViewerControl1.DataSource = null;
+            this.dataGridViewerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewerControl1.HidenCollums = new string[] {
         "ID"};
-            this.dataGridViewerControl1.Location = new System.Drawing.Point(14, 12);
+            this.dataGridViewerControl1.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewerControl1.Name = "dataGridViewerControl1";
-            this.dataGridViewerControl1.Size = new System.Drawing.Size(800, 480);
+            this.dataGridViewerControl1.Size = new System.Drawing.Size(826, 496);
             this.dataGridViewerControl1.TabIndex = 0;
             // 
             // dgvControlTest

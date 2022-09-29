@@ -33,6 +33,7 @@ namespace ControlModul.ProcessControl
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataGridViewerControl));
             this.dataGridViewObjects = new System.Windows.Forms.DataGridView();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.propertyGrid = new System.Windows.Forms.PropertyGrid();
             this.bindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingSource_Data = new System.Windows.Forms.BindingSource(this.components);
@@ -60,13 +61,21 @@ namespace ControlModul.ProcessControl
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.processWorker = new ControlModul.ProcessControl.ProcessWorker();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.propertyGrid = new System.Windows.Forms.PropertyGrid();
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemShowPrewiev = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemColumnsStyle = new System.Windows.Forms.ToolStripMenuItem();
+            this.fillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.processWorker = new ControlModul.ProcessControl.ProcessWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewObjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).BeginInit();
             this.bindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_Data)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewObjects
@@ -75,16 +84,33 @@ namespace ControlModul.ProcessControl
             this.dataGridViewObjects.AllowUserToOrderColumns = true;
             this.dataGridViewObjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dataGridViewObjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewObjects.ContextMenuStrip = this.contextMenuStrip;
             this.dataGridViewObjects.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.helpProvider.SetHelpKeyword(this.dataGridViewObjects, "dataGridView");
+            this.helpProvider.SetHelpNavigator(this.dataGridViewObjects, System.Windows.Forms.HelpNavigator.KeywordIndex);
+            this.helpProvider.SetHelpString(this.dataGridViewObjects, "Records show here");
             this.dataGridViewObjects.Location = new System.Drawing.Point(0, 28);
             this.dataGridViewObjects.MultiSelect = false;
             this.dataGridViewObjects.Name = "dataGridViewObjects";
-            this.dataGridViewObjects.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dataGridViewObjects.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridViewObjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.helpProvider.SetShowHelp(this.dataGridViewObjects, true);
             this.dataGridViewObjects.Size = new System.Drawing.Size(800, 396);
             this.dataGridViewObjects.TabIndex = 0;
             this.dataGridViewObjects.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_OpenItemEvent);
             this.dataGridViewObjects.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView_UserDeletingRowEvent);
+            // 
+            // propertyGrid
+            // 
+            this.helpProvider.SetHelpKeyword(this.propertyGrid, "propertyGrid");
+            this.helpProvider.SetHelpNavigator(this.propertyGrid, System.Windows.Forms.HelpNavigator.KeywordIndex);
+            this.helpProvider.SetHelpString(this.propertyGrid, "Selected record properities ");
+            this.propertyGrid.Location = new System.Drawing.Point(457, 28);
+            this.propertyGrid.Name = "propertyGrid";
+            this.helpProvider.SetShowHelp(this.propertyGrid, true);
+            this.propertyGrid.Size = new System.Drawing.Size(343, 396);
+            this.propertyGrid.TabIndex = 4;
+            this.toolTip.SetToolTip(this.propertyGrid, "Object properities");
             // 
             // bindingNavigator
             // 
@@ -92,6 +118,9 @@ namespace ControlModul.ProcessControl
             this.bindingNavigator.BindingSource = this.bindingSource_Data;
             this.bindingNavigator.CountItem = this.bindingNavigatorCountItem;
             this.bindingNavigator.DeleteItem = null;
+            this.helpProvider.SetHelpKeyword(this.bindingNavigator, "navigatorToolbar");
+            this.helpProvider.SetHelpNavigator(this.bindingNavigator, System.Windows.Forms.HelpNavigator.KeywordIndex);
+            this.helpProvider.SetHelpString(this.bindingNavigator, "Navigator controls and tools");
             this.bindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -125,6 +154,7 @@ namespace ControlModul.ProcessControl
             this.bindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator.Name = "bindingNavigator";
             this.bindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.helpProvider.SetShowHelp(this.bindingNavigator, true);
             this.bindingNavigator.Size = new System.Drawing.Size(800, 25);
             this.bindingNavigator.TabIndex = 1;
             this.bindingNavigator.Text = "bindingNavigator1";
@@ -144,6 +174,8 @@ namespace ControlModul.ProcessControl
             this.bindingSource_Data.AllowNew = true;
             this.bindingSource_Data.DataSourceChanged += new System.EventHandler(this.bindingSource_Data_DataSourceChanged);
             this.bindingSource_Data.CurrentChanged += new System.EventHandler(this.bindingSource_Data_CurrentChanged);
+            this.bindingSource_Data.CurrentItemChanged += new System.EventHandler(this.bindingSource_Data_CurrentItemChanged);
+            this.bindingSource_Data.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.bindingSource_Data_ListChanged);
             // 
             // bindingNavigatorCountItem
             // 
@@ -343,6 +375,64 @@ namespace ControlModul.ProcessControl
             this.helpToolStripButton.Text = "&Nápověda";
             this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "Excel files|*.xlsx|Text files|*.txt";
+            this.openFileDialog.InitialDirectory = "%desktop%";
+            this.openFileDialog.Title = "Select file as source of data";
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemShowPrewiev,
+            this.toolStripSeparator1,
+            this.columnsToolStripMenuItem,
+            this.toolStripMenuItemColumnsStyle});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(157, 76);
+            // 
+            // toolStripMenuItemShowPrewiev
+            // 
+            this.toolStripMenuItemShowPrewiev.Name = "toolStripMenuItemShowPrewiev";
+            this.toolStripMenuItemShowPrewiev.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItemShowPrewiev.Text = "Auto-Preview";
+            this.toolStripMenuItemShowPrewiev.Click += new System.EventHandler(this.toolStripMenuItemShowPrewiev_Click);
+            // 
+            // columnsToolStripMenuItem
+            // 
+            this.columnsToolStripMenuItem.Name = "columnsToolStripMenuItem";
+            this.columnsToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.columnsToolStripMenuItem.Text = "Columns Select";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
+            // 
+            // toolStripMenuItemColumnsStyle
+            // 
+            this.toolStripMenuItemColumnsStyle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fillToolStripMenuItem,
+            this.autoToolStripMenuItem});
+            this.toolStripMenuItemColumnsStyle.Name = "toolStripMenuItemColumnsStyle";
+            this.toolStripMenuItemColumnsStyle.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItemColumnsStyle.Text = "Columns Style";
+            // 
+            // fillToolStripMenuItem
+            // 
+            this.fillToolStripMenuItem.Name = "fillToolStripMenuItem";
+            this.fillToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.fillToolStripMenuItem.Text = "Fill";
+            this.fillToolStripMenuItem.Click += new System.EventHandler(this.fillToolStripMenuItem_Click);
+            // 
+            // autoToolStripMenuItem
+            // 
+            this.autoToolStripMenuItem.Name = "autoToolStripMenuItem";
+            this.autoToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.autoToolStripMenuItem.Text = "Auto";
+            this.autoToolStripMenuItem.Click += new System.EventHandler(this.autoToolStripMenuItem_Click);
+            // 
             // processWorker
             // 
             this.processWorker.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -354,21 +444,6 @@ namespace ControlModul.ProcessControl
             this.processWorker.WorkerName = "Databáze";
             this.processWorker.WorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.GetWorkerResult);
             // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
-            this.openFileDialog.Filter = "Excel files|*.xlsx|Text files|*.txt";
-            this.openFileDialog.InitialDirectory = "%desktop%";
-            this.openFileDialog.Title = "Select file as source of data";
-            // 
-            // propertyGrid
-            // 
-            this.propertyGrid.Location = new System.Drawing.Point(457, 28);
-            this.propertyGrid.Name = "propertyGrid";
-            this.propertyGrid.Size = new System.Drawing.Size(343, 396);
-            this.propertyGrid.TabIndex = 4;
-            this.toolTip.SetToolTip(this.propertyGrid, "Object properities");
-            // 
             // DataGridViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -377,14 +452,19 @@ namespace ControlModul.ProcessControl
             this.Controls.Add(this.bindingNavigator);
             this.Controls.Add(this.processWorker);
             this.Controls.Add(this.dataGridViewObjects);
+            this.helpProvider.SetHelpKeyword(this, "aboutDataGridViewer");
+            this.helpProvider.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.KeywordIndex);
             this.Name = "DataGridViewerControl";
+            this.helpProvider.SetShowHelp(this, true);
             this.Size = new System.Drawing.Size(800, 480);
             this.Load += new System.EventHandler(this.DataGridViewerControl_Load);
+            this.Leave += new System.EventHandler(this.DataGridViewerControl_Leave);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewObjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator)).EndInit();
             this.bindingNavigator.ResumeLayout(false);
             this.bindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource_Data)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,5 +504,13 @@ namespace ControlModul.ProcessControl
         private System.Windows.Forms.ToolStripButton openSourceToolStripButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.PropertyGrid propertyGrid;
+        private System.Windows.Forms.HelpProvider helpProvider;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemShowPrewiev;
+        private System.Windows.Forms.ToolStripMenuItem columnsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemColumnsStyle;
+        private System.Windows.Forms.ToolStripMenuItem fillToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoToolStripMenuItem;
     }
 }
