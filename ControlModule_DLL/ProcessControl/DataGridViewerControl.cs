@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+
+using ControlModul.DataControl;
 using ControlModul.Handlers.Loger;
 using ControlModul.Tools;
 
@@ -23,20 +26,13 @@ namespace ControlModul.ProcessControl
                 bindingNavigator.BindingSource.DataSource = value;
             }
         }
+        //Actions
+        public Func<object, bool> OpenItemDelegate;
+        public Func<object, bool> DeleteItemDelegate;
+        public Func<bool> SaveChangesDelegate;
+        public Action<object> PrintItemDelegate;
 
-        [Category("Hide")]
-        public Func<object, bool> OpenItemDelegate { get; set; }
-        [Category("Hide")]
-        public Func<object, bool> DeleteItemDelegate { get; set; }
-
-        [Category("Hide")]
-        public Func<bool> SaveChangesDelegate { get; set; }
-
-        [Category("Hide")]
-        public Action<object> PrintItemDelegate { get; set; }
-
-
-        [DisplayName("HidenCollums"), Category("Data")]
+        [DisplayName("HidenCollums"), Category("Filters")]
         public string[] HidenCollums { get; set; }
 
 
@@ -61,7 +57,8 @@ namespace ControlModul.ProcessControl
         [Category("Hide")]
         public object SelectedItem { get; private set; }
 
-        private Func<object> BindActionDelegate;
+        //Data provider
+        private IDataProvider _DataProvider;
 
         public DataGridViewerControl()
         {
@@ -113,16 +110,16 @@ namespace ControlModul.ProcessControl
         }
 
         /// <summary>
-        /// Method for binding source by delegate method.
+        /// Method for binding source directly.
         /// </summary>
-        /// <param name="bindActionDelegate">
-        /// MUST return bindable data, support list, table or other data sources.
+        /// <param name="dataSource">
+        /// Supports bindable object source or file name.
         /// </param>
-        public void BindSources(Func<object> bindActionDelegate)
+        public void BindSources(object dataSource)
         {
             try
             {
-                BindActionDelegate = bindActionDelegate;
+                _DataProvider = DataProvider.Create(dataSource);
                 processWorker.RunWorker(BindMethod_GetData);
             }
             catch (Exception ex)
@@ -132,17 +129,17 @@ namespace ControlModul.ProcessControl
         }
 
         /// <summary>
-        /// Method for binding file as source .
+        /// Method for binding source by delagete function.
         /// </summary>
-        /// <param name="filePath">
-        /// Path to source file, suppport Excel, text and other common file formats.
+        /// <param name="providerFunction">
+        /// MUST return bindable data, support list, table or other data sources.
         /// </param>
-        public void BindSources(string filePath)
+        public void BindSources(Func<object> providerFunction)
         {
             try
             {
-                //TODO
-                throw new NotImplementedException();
+                _DataProvider = DataProvider.Create(providerFunction);
+                processWorker.RunWorker(BindMethod_GetData);
             }
             catch (Exception ex)
             {
@@ -164,8 +161,7 @@ namespace ControlModul.ProcessControl
         private void bindingSource_Data_DataSourceChanged(object sender, EventArgs e)
         {
             dataGridViewObjects.DataSource = bindingNavigator.BindingSource;
-            dataGridViewObjects.Refresh();
-            //Hide columns by name
+            //Show columns by name
             HideColumns(HidenCollums);
         }
 
@@ -354,7 +350,7 @@ namespace ControlModul.ProcessControl
 
         private void pasteToolStripButton_Click(object sender, EventArgs e)
         {
-            var item = Manipulator.PasteObject<object>();
+            var item = Manipulator.PasteObject<object>(true);
 
             AddItem(item);
         }
@@ -377,11 +373,20 @@ namespace ControlModul.ProcessControl
 
         public void HideColumns(string [] collumnsNames)
         {
+            HidenCollums = collumnsNames;
+
             if (collumnsNames == null)
                 return;
+            foreach (var collumnName in collumnsNames)
+            {
+                if (!dataGridViewObjects.Columns.Contains(collumnName))
+                    continue;
 
-            //TODO
-            return;
+                dataGridViewObjects.Columns[collumnName].Visible = false;
+            }
+
+            dataGridViewObjects.Refresh();
+            this.Refresh();
         }
 
         public void Search(string searchText, string collumnName)
@@ -401,7 +406,7 @@ namespace ControlModul.ProcessControl
             try
             {
                 //Get data from method
-                e.Result = BindActionDelegate?.Invoke();
+                e.Result = _DataProvider?.GetData();
             }
             catch (Exception ex)
             {

@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataControl\DataProvider.cs" />
     <Compile Include="DBControl\Entity\DbContexExtensions.cs" />
     <Compile Include="DBControl\Excel_OLE\ExcelConnectionString.cs" />
     <Compile Include="DBControl\Excel_OLE\ExcelConnector.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="ProcessControl\DataGridViewerControl.Designer.cs">
       <DependentUpon>DataGridViewerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataControl\IDataProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

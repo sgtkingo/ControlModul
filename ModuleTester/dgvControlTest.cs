@@ -26,7 +26,7 @@ namespace ModuleTester
 
         public static List<Foo> GetData()
         {
-            return new List<Foo> { new Foo() { MyProperty = 1 }, new Foo() { MyProperty = 2 }, new Foo() { MyProperty = 3 } };
+            return new List<Foo> { new Foo() { ID = 1, MyProperty="A" }, new Foo() { ID = 2, MyProperty = "B" }, new Foo() { ID = 3, MyProperty = "C" } };
         }
     }
 }

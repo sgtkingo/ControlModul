@@ -40,16 +40,16 @@ namespace ControlModul.Tools
             try
             {
                 var item = Clipboard.GetData("ItemCopy");
+                if (autoclear)
+                {
+                    ClearClipboard();
+                }
                 return (T)item;
             }
             catch (Exception ex)
             {
                 Loger.Log(ex);
                 return default(T);
-            }
-            if( autoclear) 
-            {
-                ClearClipboard();
             }
         }
 
