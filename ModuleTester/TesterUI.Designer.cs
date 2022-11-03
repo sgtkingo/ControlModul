@@ -33,6 +33,8 @@ namespace ModuleTester
             this.buttonLogViewerTest = new System.Windows.Forms.Button();
             this.buttonLogerManagerTest = new System.Windows.Forms.Button();
             this.buttonDataViewControlTest = new System.Windows.Forms.Button();
+            this.buttonDriverSearchTest = new System.Windows.Forms.Button();
+            this.buttonListDriversTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonTestFTP
@@ -79,11 +81,35 @@ namespace ModuleTester
             this.buttonDataViewControlTest.UseVisualStyleBackColor = true;
             this.buttonDataViewControlTest.Click += new System.EventHandler(this.buttonDataViewControlTest_Click);
             // 
+            // buttonDriverSearchTest
+            // 
+            this.buttonDriverSearchTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonDriverSearchTest.Location = new System.Drawing.Point(157, 136);
+            this.buttonDriverSearchTest.Name = "buttonDriverSearchTest";
+            this.buttonDriverSearchTest.Size = new System.Drawing.Size(139, 118);
+            this.buttonDriverSearchTest.TabIndex = 4;
+            this.buttonDriverSearchTest.Text = "Driver Search Test";
+            this.buttonDriverSearchTest.UseVisualStyleBackColor = true;
+            this.buttonDriverSearchTest.Click += new System.EventHandler(this.buttonDriverSearchTest_Click);
+            // 
+            // buttonListDriversTest
+            // 
+            this.buttonListDriversTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonListDriversTest.Location = new System.Drawing.Point(12, 136);
+            this.buttonListDriversTest.Name = "buttonListDriversTest";
+            this.buttonListDriversTest.Size = new System.Drawing.Size(139, 118);
+            this.buttonListDriversTest.TabIndex = 5;
+            this.buttonListDriversTest.Text = "List Drivers Test";
+            this.buttonListDriversTest.UseVisualStyleBackColor = true;
+            this.buttonListDriversTest.Click += new System.EventHandler(this.buttonListDriversTest_Click);
+            // 
             // TesterUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 478);
+            this.Controls.Add(this.buttonListDriversTest);
+            this.Controls.Add(this.buttonDriverSearchTest);
             this.Controls.Add(this.buttonDataViewControlTest);
             this.Controls.Add(this.buttonLogerManagerTest);
             this.Controls.Add(this.buttonLogViewerTest);
@@ -103,5 +129,7 @@ namespace ModuleTester
         private System.Windows.Forms.Button buttonLogViewerTest;
         private System.Windows.Forms.Button buttonLogerManagerTest;
         private System.Windows.Forms.Button buttonDataViewControlTest;
+        private System.Windows.Forms.Button buttonDriverSearchTest;
+        private System.Windows.Forms.Button buttonListDriversTest;
     }
 }

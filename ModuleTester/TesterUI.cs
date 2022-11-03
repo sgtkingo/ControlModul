@@ -13,6 +13,7 @@ using ControlModul.FileControl;
 using ControlModul.Handlers.Loger;
 using ControlModul.ProcessControl;
 using ControlModul.Protocols.FTP;
+using ControlModul.SystemControl.Drivers;
 
 using FluentFTP;
 
@@ -80,6 +81,26 @@ namespace ModuleTester
         private void buttonDataViewControlTest_Click(object sender, EventArgs e)
         {
             if (TestDataViewControl())
+            {
+                Loger.Info($"{((Control)sender).Text} tests run result: OK!", true);
+            }
+            else
+                Loger.Error($"{((Control)sender).Text} tests run result: FAIL!!!", true);
+        }
+
+        private void buttonDriverSearchTest_Click(object sender, EventArgs e)
+        {
+            if (TestDriverSearch())
+            {
+                Loger.Info($"{((Control)sender).Text} tests run result: OK!", true);
+            }
+            else
+                Loger.Error($"{((Control)sender).Text} tests run result: FAIL!!!", true);
+        }
+
+        private void buttonListDriversTest_Click(object sender, EventArgs e)
+        {
+            if (TestListDrivers())
             {
                 Loger.Info($"{((Control)sender).Text} tests run result: OK!", true);
             }
@@ -177,7 +198,33 @@ namespace ModuleTester
             }
             return true;
         }
-        #endregion
 
+        private bool TestListDrivers()
+        {
+            try
+            {
+                DriversManager.ListDrivers();
+            }
+            catch (Exception ex)
+            {
+                Loger.LogAndVisualize(ex);
+                return false;
+            }
+            return true;
+        }
+
+        private bool TestDriverSearch()
+        {
+            try
+            {
+                return DriversManager.CheckDriver("High Definition Audio Controller");
+            }
+            catch (Exception ex)
+            {
+                Loger.LogAndVisualize(ex);
+                return false;
+            }
+        }
+        #endregion
     }
 }
