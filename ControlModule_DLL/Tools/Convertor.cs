@@ -43,6 +43,16 @@ namespace ControlModul.Tools
             }
         }
 
+        public static string BytesToString(byte[] data, string format = "X")
+        {
+            string s = string.Empty;
+            foreach (byte b in data)
+            {
+                s += b.ToString(format) + " ";
+            }
+            return s;
+        }
+
         public static byte[] StringToBytes(string plainText)
         {
             try

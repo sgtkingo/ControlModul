@@ -30,6 +30,25 @@ namespace ControlModul.SystemControl.Drivers
             }
         }
 
+        public static bool CheckDriver(string condition, string scope = "Win32_PnPSignedDriver")
+        {
+            Loger.Log("Searching for driver...");
+            try
+            {
+                SelectQuery query = new SelectQuery(scope);
+                query.Condition = condition;
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+                var drivers = searcher.Get();
+
+                return drivers.Count > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public static void ListDrivers(string scope = "Win32_PnPSignedDriver")
         {
             Loger.Log("Listing drivers...");
